@@ -5,8 +5,10 @@
   <title>خريطة السعودية التفاعلية</title>
 
   <!-- Bootstrap RTL CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+        crossorigin="anonymous">
 
   <style>
     body, html { margin:0; padding:0; height:100%; }
@@ -114,112 +116,110 @@
   </div>
 
   <!-- Bootstrap Bundle (includes Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+          crossorigin="anonymous"></script>
 
   <script>
-    // Extended data: population, capital, AND dummy employees
+    // Region data: only name (in Arabic) and employee lists, no capitals or population
     const regionData = {
       'SA-01': {
-        name: 'Ar Riyāḑ', pop: '8 591 748', capital: 'Riyadh',
+        name: 'منطقة الرياض',
         employees: [
-          { name: 'Ahmed Al-Saud',        position: 'Software Engineer', startDate: '2018-03-12' },
-          { name: 'Fatima Al-Najjar',     position: 'Project Manager',    startDate: '2019-07-01' },
-          { name: 'Talal Al-Rashid',      position: 'Business Analyst',   startDate: '2021-01-15' }
+          { name: 'أحمد السعود',      position: 'مهندس برمجيات',       startDate: '2018-03-12' },
+          { name: 'فاطمة النجار',     position: 'مديرة مشروع',         startDate: '2019-07-01' },
+          { name: 'طلال الرشيد',      position: 'محلل أعمال',          startDate: '2021-01-15' }
         ]
       },
       'SA-02': {
-        name: 'Makkah', pop: '7 769 994', capital: 'Makkah',
+        name: 'منطقة مكة المكرمة',
         employees: [
-          { name: 'Sara Al-Harbi',        position: 'HR Specialist',       startDate: '2020-05-22' },
-          { name: 'Mohammad Al-Ghamdi',   position: 'Network Administrator',startDate: '2017-11-30' }
+          { name: 'سارة الحربي',      position: 'أخصائية موارد بشرية',  startDate: '2020-05-22' },
+          { name: 'محمد الغامدي',     position: 'مسؤول شبكات',          startDate: '2017-11-30' }
         ]
       },
       'SA-03': {
-        name: 'Al Madīnah', pop: '2 389 452', capital: 'Medina',
+        name: 'المدينة المنورة',
         employees: [
-          { name: 'Noor Al-Zahrani',      position: 'Marketing Coordinator',startDate: '2019-09-10' },
-          { name: 'Khalid Al-Qurashi',    position: 'Data Scientist',      startDate: '2022-02-20' },
-          { name: 'Aisha Al-Amri',        position: 'UX Designer',         startDate: '2021-06-05' },
-          { name: 'Youssef Al-Shammari',  position: 'QA Engineer',         startDate: '2018-12-01' }
+          { name: 'نور الزهراني',     position: 'منسقة تسويق',         startDate: '2019-09-10' },
+          { name: 'خالد القرشي',      position: 'عالم بيانات',          startDate: '2022-02-20' },
+          { name: 'عائشة العامري',    position: 'مصممة تجربة مستخدم',   startDate: '2021-06-05' },
+          { name: 'يوسف الشمري',      position: 'مهندس ضمان جودة',      startDate: '2018-12-01' }
         ]
       },
       'SA-04': {
-        name: 'Ash Sharqīyah', pop: '5 125 254', capital: 'Dammam',
+        name: 'المنطقة الشرقية',
         employees: [
-          { name: 'Hassan Al-Otaibi',     position: 'Operations Manager',  startDate: '2016-08-14' },
-          { name: 'Laila Al-Shehri',      position: 'Financial Analyst',   startDate: '2018-04-19' }
+          { name: 'حسن العتيبي',      position: 'مدير عمليات',         startDate: '2016-08-14' },
+          { name: 'ليلى الشهري',      position: 'محللة مالية',         startDate: '2018-04-19' },
+          { name: 'سليمان الشمري',    position: 'مهندس شبكات',         startDate: '2020-11-25' }
         ]
       },
       'SA-05': {
-        name: 'Al Qaşīm', pop: '1 336 179', capital: 'Buraidah',
+        name: 'منطقة القصيم',
         employees: [
-          { name: 'Feras Al-Qahtani',     position: 'Sales Executive',     startDate: '2020-10-12' },
-          { name: 'Huda Al-Mutairi',      position: 'Business Development',startDate: '2019-03-27' },
-          { name: 'Sami Al-Farhan',       position: 'System Architect',    startDate: '2021-11-03' }
+          { name: 'نجلاء الرشيد',     position: 'مديرة موارد بشرية',   startDate: '2017-02-28' },
+          { name: 'عبدالعزيز القحطاني', position:'محلل نظم',           startDate: '2019-10-14' }
         ]
       },
       'SA-06': {
-        name: 'Ḩā’il', pop: '746 406', capital: 'Ha’il',
+        name: 'منطقة حائل',
         employees: [
-          { name: 'Reema Al-Johani',      position: 'IT Support',         startDate: '2017-05-08' },
-          { name: 'Nawaf Al-Khudair',     position: 'Security Specialist',startDate: '2020-07-29' }
+          { name: 'ماجد العرادي',     position: 'منسق إقليمي',        startDate: '2018-05-10' },
+          { name: 'نورة الحربي',      position: 'ضابط علاقات عامة',    startDate: '2019-12-01' }
         ]
       },
       'SA-07': {
-        name: 'Tabūk', pop: '886 036', capital: 'Tabuk',
+        name: 'منطقة تبوك',
         employees: [
-          { name: 'Abdulrahman Al-Rashid',position: 'Product Owner',      startDate: '2018-01-23' },
-          { name: 'Dalia Al-Qahtani',     position: 'Graphic Designer',    startDate: '2019-12-11' },
-          { name: 'Majed Al-Fahad',       position: 'DevOps Engineer',     startDate: '2021-04-02' },
-          { name: 'Rana Al-Ghamdi',       position: 'Content Strategist',  startDate: '2022-08-17' }
+          { name: 'أميرة النعيمي',    position: 'مديرة الموردين',      startDate: '2016-09-11' },
+          { name: 'سعود القرني',      position: 'محلل بيانات',          startDate: '2020-04-22' },
+          { name: 'ريم الدوسري',      position: 'مهندسة برمجيات',       startDate: '2021-08-05' }
         ]
       },
       'SA-08': {
-        name: 'Al Ḩudūd ash Shamālīyah', pop: '373 577', capital: 'Arar',
+        name: 'منطقة الحدود الشمالية',
         employees: [
-          { name: 'Lama Al-Jaber',        position: 'Legal Advisor',      startDate: '2018-06-30' },
-          { name: 'Faisal Al-Harbi',      position: 'Procurement Officer',startDate: '2019-01-15' },
-          { name: 'Hajar Al-Qahtani',     position: 'Compliance Manager', startDate: '2020-09-21' }
+          { name: 'فهد الرشيدي',      position: 'مدير مشاريع',         startDate: '2017-06-30' },
+          { name: 'عائشة الزهراني',   position: 'أخصائية تسويق',        startDate: '2019-03-15' }
         ]
       },
       'SA-09': {
-        name: 'Jīzān', pop: '1 404 997', capital: 'Jizan',
+        name: 'منطقة جازان',
         employees: [
-          { name: 'Omar Al-Farsi',        position: 'Regional Director',  startDate: '2015-10-05' },
-          { name: 'Sarah Al-Shahrani',    position: 'Customer Service',    startDate: '2021-02-14' }
+          { name: 'ياسر القحطاني',    position: 'مهندس نظم',           startDate: '2018-07-07' },
+          { name: 'جميلة الحربي',     position: 'محللة أعمال',         startDate: '2020-10-20' }
         ]
       },
       'SA-10': {
-        name: 'Najrān', pop: '592 300', capital: 'Najran',
+        name: 'منطقة نجران',
         employees: [
-          { name: 'Abdulaziz Al-Dossary', position: 'Logistics Coordinator',startDate: '2017-03-08' },
-          { name: 'Maryam Al-Harthi',     position: 'HR Manager',         startDate: '2019-05-19' },
-          { name: 'Nasser Al-Mansour',    position: 'Marketing Analyst',  startDate: '2022-01-27' }
+          { name: 'نواف السبيعي',     position: 'مهندس ميكانيكي',      startDate: '2017-11-08' },
+          { name: 'هاجر الشهراني',    position: 'محاسبة',              startDate: '2021-01-25' }
         ]
       },
       'SA-11': {
-        name: 'Al Bāḥah', pop: '339 174', capital: 'Al Bahah',
+        name: 'منطقة الباحة',
         employees: [
-          { name: 'Abeer Al-Qahtani',     position: 'Quality Assurance',  startDate: '2018-11-30' },
-          { name: 'Abdullah Al-Hamad',    position: 'Systems Engineer',    startDate: '2020-02-03' }
+          { name: 'عبير القحطاني',     position: 'ضمان جودة',           startDate: '2018-11-30' },
+          { name: 'عبدالله الحامد',   position: 'مهندس نظم',           startDate: '2020-02-03' }
         ]
       },
       'SA-12': {
-        name: 'Al Jawf', pop: '595 822', capital: 'Sakakah',
+        name: 'منطقة الجوف',
         employees: [
-          { name: 'Saad Al-Otaibi',       position: 'Sales Manager',       startDate: '2016-07-22' },
-          { name: 'Najwa Al-Anazi',       position: 'Graphic Designer',    startDate: '2019-08-05' },
-          { name: 'Ibrahim Al-Ruwais',    position: 'Data Analyst',        startDate: '2021-09-17' },
-          { name: 'Salma Al-Qahtani',     position: 'Marketing Specialist',startDate: '2022-06-12' }
+          { name: 'سعد العتيبي',      position: 'مدير مبيعات',         startDate: '2016-07-22' },
+          { name: 'نجوى العنزي',      position: 'مصممة جرافيك',        startDate: '2019-08-05' },
+          { name: 'إبراهيم الرويس',    position: 'محلل بيانات',          startDate: '2021-09-17' },
+          { name: 'سلمى القحطاني',    position: 'أخصائية تسويق',        startDate: '2022-06-12' }
         ]
       },
       'SA-14': {
-        name: '’Asir', pop: '2 024 285', capital: 'Abha',
+        name: 'منطقة عسير',
         employees: [
-          { name: 'Waleed Al-Shehri',     position: 'Regional Coordinator',startDate: '2017-12-09' },
-          { name: 'Amal Al-Ahmari',       position: 'PR Officer',          startDate: '2018-05-14' },
-          { name: 'Faisal Al-Mutairi',    position: 'Network Engineer',    startDate: '2020-10-23' }
+          { name: 'وليد الشهري',      position: 'منسق إقليمي',         startDate: '2017-12-09' },
+          { name: 'أمل الأحمدي',      position: 'ضابط علاقات عامة',     startDate: '2018-05-14' },
+          { name: 'فيصل المطيري',     position: 'مهندس شبكات',         startDate: '2020-10-23' }
         ]
       }
     };
@@ -233,10 +233,10 @@
 
     // Wire up all <path> in the SVG
     container.querySelectorAll('path').forEach(path => {
-      // tooltip
+      // tooltip: show region name + total employees
       path.addEventListener('mouseover', e => {
         const d = regionData[path.id]; if (!d) return;
-        tooltip.innerHTML = `<strong>${d.name}</strong><br>عدد السكان: ${d.pop}`;
+        tooltip.innerHTML = `<strong>${d.name}</strong><br>عدد الموظفين: ${d.employees.length}`;
         tooltip.style.display = 'block';
       });
       path.addEventListener('mousemove', e => {
@@ -244,28 +244,23 @@
         tooltip.style.left = (e.clientX - r.left + 10) + 'px';
         tooltip.style.top  = (e.clientY - r.top  + 10) + 'px';
       });
-      path.addEventListener('mouseout', () => tooltip.style.display = 'none');
+      path.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+      });
 
-      // click → show modal
+      // click → show only employees table
       path.addEventListener('click', () => {
-        const d = regionData[path.id];
-        if (!d) return;
+        const d = regionData[path.id]; if (!d) return;
+        const rows = d.employees.map(emp => `
+          <tr>
+            <td>${emp.name}</td>
+            <td>${emp.position}</td>
+            <td>${emp.startDate}</td>
+          </tr>
+        `).join('');
 
-        // build employees table rows
-        const rows = d.employees.map(emp =>
-          `<tr>
-             <td>${emp.name}</td>
-             <td>${emp.position}</td>
-             <td>${emp.startDate}</td>
-           </tr>`
-        ).join('');
-
-        // fill modal
         modalTitle.textContent = d.name;
         modalBody.innerHTML = `
-          <p>عدد السكان: ${d.pop}</p>
-          <p>العاصمة: ${d.capital}</p>
-          <hr>
           <h6>الموظفون:</h6>
           <div class="table-responsive">
             <table class="table table-striped mb-0">
@@ -276,12 +271,9 @@
                   <th scope="col">تاريخ البدء</th>
                 </tr>
               </thead>
-              <tbody>
-                ${rows}
-              </tbody>
+              <tbody>${rows}</tbody>
             </table>
           </div>`;
-
         bsModal.show();
       });
     });
