@@ -10,39 +10,19 @@
 
   <style>
     body, html { margin:0; padding:0; height:100%; }
-    .map-container {
-      position: relative;
-      width:100%;
-      max-width:800px;
-      margin:20px auto;
-    }
-    .map-container svg {
-      width:100%; height:auto; display:block;
-    }
+    .map-container { position: relative; width:100%; max-width:800px; margin:20px auto; }
+    .map-container svg { width:100%; height:auto; display:block; }
     #tooltip {
-      position: absolute;
-      pointer-events: none;
-      display: none;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #3498db;
-      border-radius: 4px;
-      padding: 6px 10px;
-      font-size: 14px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      white-space: nowrap;
-      z-index: 10;
+      position: absolute; pointer-events: none; display: none;
+      background: rgba(255,255,255,0.95); border:1px solid #3498db;
+      border-radius:4px; padding:6px 10px; font-size:14px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2); white-space:nowrap; z-index:10;
     }
     .map-container path {
-      fill: transparent;
-      pointer-events: all;
-      cursor: pointer;
-      stroke: rgba(52,152,219,0.5);
-      stroke-width: 1;
-      transition: fill .2s;
+      fill: transparent; pointer-events: all; cursor: pointer;
+      stroke: rgba(52,152,219,0.5); stroke-width:1; transition: fill .2s;
     }
-    .map-container path:hover {
-      fill: rgba(52,152,219,0.3);
-    }
+    .map-container path:hover { fill: rgba(52,152,219,0.3); }
   </style>
 </head>
 <body>
@@ -123,15 +103,12 @@
   <!-- Bootstrap Modal -->
   <div class="modal fade" id="regionModal" tabindex="-1" aria-labelledby="regionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-end"> <!-- text-end for RTL -->
+      <div class="modal-content text-end">
         <div class="modal-header">
           <h5 class="modal-title" id="regionModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
         </div>
-        <div class="modal-body">
-          <p id="modalPopulation" class="mb-1"></p>
-          <p id="modalCapital"    class="mb-0"></p>
-        </div>
+        <div class="modal-body" id="modalBody"><!-- filled by JS --></div>
       </div>
     </div>
   </div>
@@ -141,37 +118,124 @@
 
 
   <script>
-    // Extend your data with 'capital'
+    // Extended data: population, capital, AND dummy employees
     const regionData = {
-      'SA-01': { name: 'Ar Riyāḑ',                pop: '8 591 748', capital: 'Riyadh' },
-      'SA-02': { name: 'Makkah',                  pop: '7 769 994', capital: 'Makkah' },
-      'SA-03': { name: 'Al Madīnah',              pop: '2 389 452', capital: 'Medina' },
-      'SA-04': { name: 'Ash Sharqīyah',           pop: '5 125 254', capital: 'Dammam' },
-      'SA-05': { name: 'Al Qaşīm',                pop: '1 336 179', capital: 'Buraidah' },
-      'SA-06': { name: 'Ḩā’il',                   pop: '746 406',   capital: 'Ha’il' },
-      'SA-07': { name: 'Tabūk',                   pop: '886 036',   capital: 'Tabuk' },
-      'SA-08': { name: 'Al Ḩudūd ash Shamālīyah', pop: '373 577',   capital: 'Arar' },
-      'SA-09': { name: 'Jīzān',                   pop: '1 404 997', capital: 'Jizan' },
-      'SA-10': { name: 'Najrān',                  pop: '592 300',   capital: 'Najran' },
-      'SA-11': { name: 'Al Bāḥah',                pop: '339 174',   capital: 'Al Bahah' },
-      'SA-12': { name: 'Al Jawf',                 pop: '595 822',   capital: 'Sakakah' },
-      'SA-14': { name: '’Asir',                   pop: '2 024 285', capital: 'Abha' }
+      'SA-01': {
+        name: 'Ar Riyāḑ', pop: '8 591 748', capital: 'Riyadh',
+        employees: [
+          { name: 'Ahmed Al-Saud',        position: 'Software Engineer', startDate: '2018-03-12' },
+          { name: 'Fatima Al-Najjar',     position: 'Project Manager',    startDate: '2019-07-01' },
+          { name: 'Talal Al-Rashid',      position: 'Business Analyst',   startDate: '2021-01-15' }
+        ]
+      },
+      'SA-02': {
+        name: 'Makkah', pop: '7 769 994', capital: 'Makkah',
+        employees: [
+          { name: 'Sara Al-Harbi',        position: 'HR Specialist',       startDate: '2020-05-22' },
+          { name: 'Mohammad Al-Ghamdi',   position: 'Network Administrator',startDate: '2017-11-30' }
+        ]
+      },
+      'SA-03': {
+        name: 'Al Madīnah', pop: '2 389 452', capital: 'Medina',
+        employees: [
+          { name: 'Noor Al-Zahrani',      position: 'Marketing Coordinator',startDate: '2019-09-10' },
+          { name: 'Khalid Al-Qurashi',    position: 'Data Scientist',      startDate: '2022-02-20' },
+          { name: 'Aisha Al-Amri',        position: 'UX Designer',         startDate: '2021-06-05' },
+          { name: 'Youssef Al-Shammari',  position: 'QA Engineer',         startDate: '2018-12-01' }
+        ]
+      },
+      'SA-04': {
+        name: 'Ash Sharqīyah', pop: '5 125 254', capital: 'Dammam',
+        employees: [
+          { name: 'Hassan Al-Otaibi',     position: 'Operations Manager',  startDate: '2016-08-14' },
+          { name: 'Laila Al-Shehri',      position: 'Financial Analyst',   startDate: '2018-04-19' }
+        ]
+      },
+      'SA-05': {
+        name: 'Al Qaşīm', pop: '1 336 179', capital: 'Buraidah',
+        employees: [
+          { name: 'Feras Al-Qahtani',     position: 'Sales Executive',     startDate: '2020-10-12' },
+          { name: 'Huda Al-Mutairi',      position: 'Business Development',startDate: '2019-03-27' },
+          { name: 'Sami Al-Farhan',       position: 'System Architect',    startDate: '2021-11-03' }
+        ]
+      },
+      'SA-06': {
+        name: 'Ḩā’il', pop: '746 406', capital: 'Ha’il',
+        employees: [
+          { name: 'Reema Al-Johani',      position: 'IT Support',         startDate: '2017-05-08' },
+          { name: 'Nawaf Al-Khudair',     position: 'Security Specialist',startDate: '2020-07-29' }
+        ]
+      },
+      'SA-07': {
+        name: 'Tabūk', pop: '886 036', capital: 'Tabuk',
+        employees: [
+          { name: 'Abdulrahman Al-Rashid',position: 'Product Owner',      startDate: '2018-01-23' },
+          { name: 'Dalia Al-Qahtani',     position: 'Graphic Designer',    startDate: '2019-12-11' },
+          { name: 'Majed Al-Fahad',       position: 'DevOps Engineer',     startDate: '2021-04-02' },
+          { name: 'Rana Al-Ghamdi',       position: 'Content Strategist',  startDate: '2022-08-17' }
+        ]
+      },
+      'SA-08': {
+        name: 'Al Ḩudūd ash Shamālīyah', pop: '373 577', capital: 'Arar',
+        employees: [
+          { name: 'Lama Al-Jaber',        position: 'Legal Advisor',      startDate: '2018-06-30' },
+          { name: 'Faisal Al-Harbi',      position: 'Procurement Officer',startDate: '2019-01-15' },
+          { name: 'Hajar Al-Qahtani',     position: 'Compliance Manager', startDate: '2020-09-21' }
+        ]
+      },
+      'SA-09': {
+        name: 'Jīzān', pop: '1 404 997', capital: 'Jizan',
+        employees: [
+          { name: 'Omar Al-Farsi',        position: 'Regional Director',  startDate: '2015-10-05' },
+          { name: 'Sarah Al-Shahrani',    position: 'Customer Service',    startDate: '2021-02-14' }
+        ]
+      },
+      'SA-10': {
+        name: 'Najrān', pop: '592 300', capital: 'Najran',
+        employees: [
+          { name: 'Abdulaziz Al-Dossary', position: 'Logistics Coordinator',startDate: '2017-03-08' },
+          { name: 'Maryam Al-Harthi',     position: 'HR Manager',         startDate: '2019-05-19' },
+          { name: 'Nasser Al-Mansour',    position: 'Marketing Analyst',  startDate: '2022-01-27' }
+        ]
+      },
+      'SA-11': {
+        name: 'Al Bāḥah', pop: '339 174', capital: 'Al Bahah',
+        employees: [
+          { name: 'Abeer Al-Qahtani',     position: 'Quality Assurance',  startDate: '2018-11-30' },
+          { name: 'Abdullah Al-Hamad',    position: 'Systems Engineer',    startDate: '2020-02-03' }
+        ]
+      },
+      'SA-12': {
+        name: 'Al Jawf', pop: '595 822', capital: 'Sakakah',
+        employees: [
+          { name: 'Saad Al-Otaibi',       position: 'Sales Manager',       startDate: '2016-07-22' },
+          { name: 'Najwa Al-Anazi',       position: 'Graphic Designer',    startDate: '2019-08-05' },
+          { name: 'Ibrahim Al-Ruwais',    position: 'Data Analyst',        startDate: '2021-09-17' },
+          { name: 'Salma Al-Qahtani',     position: 'Marketing Specialist',startDate: '2022-06-12' }
+        ]
+      },
+      'SA-14': {
+        name: '’Asir', pop: '2 024 285', capital: 'Abha',
+        employees: [
+          { name: 'Waleed Al-Shehri',     position: 'Regional Coordinator',startDate: '2017-12-09' },
+          { name: 'Amal Al-Ahmari',       position: 'PR Officer',          startDate: '2018-05-14' },
+          { name: 'Faisal Al-Mutairi',    position: 'Network Engineer',    startDate: '2020-10-23' }
+        ]
+      }
     };
 
     const container = document.getElementById('map-container');
     const tooltip   = document.getElementById('tooltip');
     const modalEl   = document.getElementById('regionModal');
     const modalTitle= document.getElementById('regionModalLabel');
-    const modalPop  = document.getElementById('modalPopulation');
-    const modalCap  = document.getElementById('modalCapital');
+    const modalBody = document.getElementById('modalBody');
     const bsModal   = new bootstrap.Modal(modalEl);
 
-    const svg = container.querySelector('svg');
-    svg.querySelectorAll('path').forEach(path => {
-      // Tooltip handlers
+    // Wire up all <path> in the SVG
+    container.querySelectorAll('path').forEach(path => {
+      // tooltip
       path.addEventListener('mouseover', e => {
-        const d = regionData[path.id];
-        if (!d) return;
+        const d = regionData[path.id]; if (!d) return;
         tooltip.innerHTML = `<strong>${d.name}</strong><br>عدد السكان: ${d.pop}`;
         tooltip.style.display = 'block';
       });
@@ -182,13 +246,42 @@
       });
       path.addEventListener('mouseout', () => tooltip.style.display = 'none');
 
-      // Click → show Bootstrap modal
+      // click → show modal
       path.addEventListener('click', () => {
         const d = regionData[path.id];
         if (!d) return;
-        modalTitle.textContent      = d.name;
-        modalPop.textContent        = `عدد السكان: ${d.pop}`;
-        modalCap.textContent        = `العاصمة: ${d.capital}`;
+
+        // build employees table rows
+        const rows = d.employees.map(emp =>
+          `<tr>
+             <td>${emp.name}</td>
+             <td>${emp.position}</td>
+             <td>${emp.startDate}</td>
+           </tr>`
+        ).join('');
+
+        // fill modal
+        modalTitle.textContent = d.name;
+        modalBody.innerHTML = `
+          <p>عدد السكان: ${d.pop}</p>
+          <p>العاصمة: ${d.capital}</p>
+          <hr>
+          <h6>الموظفون:</h6>
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">الاسم</th>
+                  <th scope="col">المنصب</th>
+                  <th scope="col">تاريخ البدء</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+              </tbody>
+            </table>
+          </div>`;
+
         bsModal.show();
       });
     });
