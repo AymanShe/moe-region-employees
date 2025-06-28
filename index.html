@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>خريطة السعودية التفاعلية</title>
+
+  <!-- Bootstrap RTL CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
   <style>
-    /* Container */
-    body, html { margin:0; padding:0; height:100%; direction: rtl; }
+    body, html { margin:0; padding:0; height:100%; }
     .map-container {
       position: relative;
-      width: 100%;
-      max-width: 800px;    /* or match your SVG’s natural width */
-      margin: 20px auto;
+      width:100%;
+      max-width:800px;
+      margin:20px auto;
     }
-    /* Make SVG responsive */
     .map-container svg {
-      width: 100%;
-      height: auto;
-      display: block;
+      width:100%; height:auto; display:block;
     }
-    /* Tooltip */
     #tooltip {
       position: absolute;
       pointer-events: none;
@@ -27,20 +27,18 @@
       border: 1px solid #3498db;
       border-radius: 4px;
       padding: 6px 10px;
-      font-family: sans-serif;
       font-size: 14px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       white-space: nowrap;
       z-index: 10;
     }
-    /* Province hit-areas */
     .map-container path {
       fill: transparent;
       pointer-events: all;
       cursor: pointer;
       stroke: rgba(52,152,219,0.5);
       stroke-width: 1;
-      transition: fill 0.2s;
+      transition: fill .2s;
     }
     .map-container path:hover {
       fill: rgba(52,152,219,0.3);
@@ -53,12 +51,18 @@
     <div id="tooltip"></div>
 
     <!-- INLINE SVG START -->
-    <svg xmlns="http://www.w3.org/2000/svg"
-         xmlns:mapsvg="http://mapsvg.com"
-         xmlns:dc="http://purl.org/dc/elements/1.1/"
-         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         viewBox="0 0 730.13947 600.4032">
-
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <!-- Created for MapSVG plugin: http://mapsvg.com -->
+    <svg
+       xmlns:mapsvg="http://mapsvg.com"
+       xmlns:dc="http://purl.org/dc/elements/1.1/"
+       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+       xmlns:svg="http://www.w3.org/2000/svg"
+       xmlns="http://www.w3.org/2000/svg"
+       mapsvg:geoViewBox="34.492946 32.271167 55.688143 16.387460"
+       width="730.13947"
+       height="600.4032">
+     
       <path
          d="m 456.82718,487.03041 -10.13,2.63 -16.39,2.39 -58.85,5.04 -8.85,-0.7 -3.24,-0.72 -5.22,-2.39 -8.51,-5.59 0,0 -13.54,-12.09 -3.91,-6.36 -2.75,-2.96 -0.22,-1.6 1.23,-6.11 3.34,-6.09 0.08,-2.96 -1.06,-1.73 -3.6,-3.6 -3.07,-4.93 -5.76,-5.01 0,0 -4.34,-7.06 -4.77,-6.36 -0.58,-1.47 1.76,-8.48 -0.54,-6.95 2.33,-3.42 0.68,-2.34 -1.79,-13.1 0.96,-6.16 -0.31,-1.57 -6.45,-1.41 -5.65,1.47 -3.7,-1.28 -1.26,-2.3 0.28,-5.34 0.86,-2.93 -1.84,-1.88 -3.09,-0.85 -14.1,-0.63 -3.01,-1.63 -5.15,-11.26 -0.91,-5.64 -2.1,-4.72 -1.13,-4.86 -4.16,-3.3 -0.36,-3.13 0.44,-3.64 0,0 -0.04,-9.03 1.41,-4.88 -0.94,-3.6 2.95,-4.25 0.4,-3.14 0,0 3.04,-5.08 2.17,-1.58 1.5,0.12 5.17,2.55 3.87,0.81 5.73,0.5 5.67,-0.89 5.69,0.87 2.43,-1.79 0.85,-2.18 -1.91,-3.83 0.15,-2.3 5.42,-6.69 3.27,-2.52 12.88,-3.15 2.84,-2.81 3.09,-1.74 2.28,-4.47 2.02,-1.97 3.13,-0.82 8.3,1.06 7.2,-0.68 5.53,0.22 0.84,-3.9 -0.31,-3.16 -2.52,-4.86 1.08,-2.91 -0.14,-0.86 -6.69,-10.16 -3.6,-3.57 -0.49,-1.52 0.84,-5.74 -0.43,-5.12 4.01,-1.1 4.5,-5.87 2.46,-2.11 4.18,-1.84 0.62,-1.48 -0.15,-2.5 -1.34,-2.5 -3.6,-2.99 -2.35,-0.93 0,0 -0.68,-1.88 0.06,-1.59 0.99,-3.1 2.42,-3.32 3.15,-1.64 0,0 1.94,2.12 1.51,0.52 1.8,-0.86 1.3,-2.23 0,0 3.32,2.32 2.12,2.21 1.4,5.11 1.24,1.53 10.41,6.08 5.75,1.06 3.46,4.22 4.06,3.38 2.34,0.63 5.64,0.11 3.01,0.81 9.86,6.94 2.49,1.19 2.36,0.05 4.41,-1.01 1.55,0.22 6.45,6.08 1.47,2.52 8.88,3.16 3.86,2.08 1.09,2.56 0.43,4.96 0.38,22.63 -0.63,15.07 0.35,7.41 0.68,3.7 1.12,1.79 2.28,1.8 9.44,6.3 9.19,9.16 1.68,2.06 2.95,5.78 1.36,6.89 -0.02,7.75 z"
          title="Ar Riyāḑ"
@@ -111,53 +115,81 @@
          d="m 303.24718,558.19041 -1.98,-3.01 -2.95,-0.6 -0.68,-0.57 -2.65,-4.63 -3.6,-1.82 0.14,-4.42 -1,-1.12 -2.21,0.88 -2.87,2.16 -1.21,2.1 -1.66,6.75 -0.57,0.66 -1.4,0.14 -1.52,-0.63 -3.25,-3.16 -1.59,-3.73 -1.28,-1.24 -8.28,-0.4 -0.73,-0.64 -0.85,-2.89 -1.08,-1.35 -2.16,-0.23 -2.94,0.45 -0.74,-0.47 -0.28,-1.5 0.83,-7.27 -1.27,-1.03 -4.46,0.47 0,0 1.5,-6.41 -2.97,-9.14 -2.11,-1.2 -6.71,-0.21 -1.43,-0.49 -1.03,-1.47 -0.61,-2.97 0.49,-10 1.97,1.88 0.75,-0.06 3.87,-2.82 2.24,-0.38 4.74,0.44 1.52,-0.75 0.76,-1.42 1.27,-4.6 -2.19,-4.44 1.31,-6.92 -0.21,-1.51 -1.85,-1.89 -2.29,-0.13 -1.5,0.74 0,0 4.26,-8.69 -0.23,-3.55 0.84,-1.79 5.82,-3.97 1.04,-1.45 -0.11,-1.59 -2.05,-1.97 -0.23,-0.79 2.15,-6.42 0,0 4.67,9.08 1.4,1.02 2.28,0.24 2.31,-1.13 10.11,-9.25 6.41,-3.06 4.26,-3.8 4.55,-0.28 3.16,-1.52 2.26,-0.24 5.21,1.3 5.72,-3.77 4.02,-1.46 0,0 5.76,5.01 3.07,4.93 3.6,3.6 1.06,1.73 -0.08,2.96 -3.34,6.09 -1.23,6.11 0.22,1.6 2.75,2.96 3.91,6.36 13.54,12.09 0,0 -0.04,6.08 -1.12,1.39 -3.85,1.94 -0.69,1.59 1.76,8.57 -0.17,2.12 -0.97,2.22 -1.22,1.41 -2.38,1.42 -6.32,2.02 -0.95,1.05 -1.06,3.02 -1.08,1.48 -8.21,7.56 -3.08,3.43 -0.88,1.69 -0.08,1.66 1.38,6.12 -0.77,8.37 -0.67,1.47 1.3,5.93 -1.15,3.24 0,0 -0.11,1.8 -2.37,-2.3 -5.29,-3.37 -2.46,-0.34 z"
          title="'Asir"
          id="SA-14" />
-    
     </svg>
+    
     <!-- INLINE SVG END -->
   </div>
 
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="regionModal" tabindex="-1" aria-labelledby="regionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-end"> <!-- text-end for RTL -->
+        <div class="modal-header">
+          <h5 class="modal-title" id="regionModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modalPopulation" class="mb-1"></p>
+          <p id="modalCapital"    class="mb-0"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
   <script>
-    // Population data for each path ID
+    // Extend your data with 'capital'
     const regionData = {
-      'SA-01': { name: 'Ar Riyāḑ',                pop: '8 591 748' },
-      'SA-02': { name: 'Makkah',                  pop: '7 769 994' },
-      'SA-03': { name: 'Al Madīnah',              pop: '2 389 452' },
-      'SA-04': { name: 'Ash Sharqīyah',           pop: '5 125 254' },
-      'SA-05': { name: 'Al Qaşīm',                pop: '1 336 179' },
-      'SA-06': { name: 'Ḩā’il',                   pop: '746 406'   },
-      'SA-07': { name: 'Tabūk',                   pop: '886 036'   },
-      'SA-08': { name: 'Al Ḩudūd ash Shamālīyah', pop: '373 577'   },
-      'SA-09': { name: 'Jīzān',                   pop: '1 404 997' },
-      'SA-10': { name: 'Najrān',                  pop: '592 300'   },
-      'SA-11': { name: 'Al Bāḥah',                pop: '339 174'   },
-      'SA-12': { name: 'Al Jawf',                 pop: '595 822'   },
-      'SA-14': { name: '’Asir',                   pop: '2 024 285' }
+      'SA-01': { name: 'Ar Riyāḑ',                pop: '8 591 748', capital: 'Riyadh' },
+      'SA-02': { name: 'Makkah',                  pop: '7 769 994', capital: 'Makkah' },
+      'SA-03': { name: 'Al Madīnah',              pop: '2 389 452', capital: 'Medina' },
+      'SA-04': { name: 'Ash Sharqīyah',           pop: '5 125 254', capital: 'Dammam' },
+      'SA-05': { name: 'Al Qaşīm',                pop: '1 336 179', capital: 'Buraidah' },
+      'SA-06': { name: 'Ḩā’il',                   pop: '746 406',   capital: 'Ha’il' },
+      'SA-07': { name: 'Tabūk',                   pop: '886 036',   capital: 'Tabuk' },
+      'SA-08': { name: 'Al Ḩudūd ash Shamālīyah', pop: '373 577',   capital: 'Arar' },
+      'SA-09': { name: 'Jīzān',                   pop: '1 404 997', capital: 'Jizan' },
+      'SA-10': { name: 'Najrān',                  pop: '592 300',   capital: 'Najran' },
+      'SA-11': { name: 'Al Bāḥah',                pop: '339 174',   capital: 'Al Bahah' },
+      'SA-12': { name: 'Al Jawf',                 pop: '595 822',   capital: 'Sakakah' },
+      'SA-14': { name: '’Asir',                   pop: '2 024 285', capital: 'Abha' }
     };
 
     const container = document.getElementById('map-container');
     const tooltip   = document.getElementById('tooltip');
-    const svg       = container.querySelector('svg');
+    const modalEl   = document.getElementById('regionModal');
+    const modalTitle= document.getElementById('regionModalLabel');
+    const modalPop  = document.getElementById('modalPopulation');
+    const modalCap  = document.getElementById('modalCapital');
+    const bsModal   = new bootstrap.Modal(modalEl);
 
+    const svg = container.querySelector('svg');
     svg.querySelectorAll('path').forEach(path => {
+      // Tooltip handlers
       path.addEventListener('mouseover', e => {
-        const data = regionData[path.id];
-        if (!data) return;
-        tooltip.innerHTML = `<strong>${data.name}</strong><br>عدد السكان: ${data.pop}`;
+        const d = regionData[path.id];
+        if (!d) return;
+        tooltip.innerHTML = `<strong>${d.name}</strong><br>عدد السكان: ${d.pop}`;
         tooltip.style.display = 'block';
       });
       path.addEventListener('mousemove', e => {
-        const rect = container.getBoundingClientRect();
-        tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
-        tooltip.style.top  = (e.clientY - rect.top  + 10) + 'px';
+        const r = container.getBoundingClientRect();
+        tooltip.style.left = (e.clientX - r.left + 10) + 'px';
+        tooltip.style.top  = (e.clientY - r.top  + 10) + 'px';
       });
-      path.addEventListener('mouseout', () => {
-        tooltip.style.display = 'none';
-      });
+      path.addEventListener('mouseout', () => tooltip.style.display = 'none');
+
+      // Click → show Bootstrap modal
       path.addEventListener('click', () => {
-        const data = regionData[path.id];
-        if (!data) return;
-        // TODO: replace this alert with your employee-list drawer
-        alert(`المنطقة: ${data.name}\nعدد السكان: ${data.pop}`);
+        const d = regionData[path.id];
+        if (!d) return;
+        modalTitle.textContent      = d.name;
+        modalPop.textContent        = `عدد السكان: ${d.pop}`;
+        modalCap.textContent        = `العاصمة: ${d.capital}`;
+        bsModal.show();
       });
     });
   </script>
