@@ -20,6 +20,12 @@ class EmployeeMapApp {
     try {
       console.log('Initializing Employee Map Application...');
 
+      // Initialize accessibility features
+      if (window.AccessibilityManager) {
+        window.AccessibilityManager.init();
+        window.AccessibilityManager.announceLoading('جاري تحميل البيانات');
+      }
+
       // Show loading indicator
       ErrorHandler.showLoading('جاري تحميل البيانات...');
 
@@ -30,9 +36,20 @@ class EmployeeMapApp {
       // Hide loading indicator
       ErrorHandler.hideLoading();
 
+      // Announce loaded state
+      if (window.AccessibilityManager) {
+        window.AccessibilityManager.announceLoaded('تم تحميل البيانات بنجاح');
+      }
+
       console.log('Application initialized successfully');
     } catch (error) {
       ErrorHandler.hideLoading();
+
+      // Announce error
+      if (window.AccessibilityManager) {
+        window.AccessibilityManager.announceError('فشل تحميل البيانات');
+      }
+
       this.handleError('Failed to initialize application', error);
     }
   }
@@ -208,6 +225,14 @@ class EmployeeMapApp {
 
     // Show modal
     this.regionModal.show();
+
+    // Enhance table accessibility
+    if (window.AccessibilityManager) {
+      const table = this.regionModalBody.querySelector('table');
+      if (table) {
+        window.AccessibilityManager.enhanceTableAccessibility(table);
+      }
+    }
   }
 
   /**
@@ -270,6 +295,14 @@ class EmployeeMapApp {
 
     // Show modal
     this.employeeModal.show();
+
+    // Enhance carousel accessibility
+    if (window.AccessibilityManager) {
+      const carousel = this.employeeModalBody.querySelector('.carousel');
+      if (carousel) {
+        window.AccessibilityManager.enhanceCarouselAccessibility(carousel);
+      }
+    }
   }
 
   /**

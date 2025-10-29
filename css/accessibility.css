@@ -1,0 +1,370 @@
+/**
+ * Accessibility Styles
+ * WCAG 2.1 AA compliant styles for keyboard navigation, screen readers, and focus management
+ */
+
+/* ==========================================================================
+   Screen Reader Only
+   ========================================================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ==========================================================================
+   Skip Links
+   ========================================================================== */
+
+.skip-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #fff;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 10px;
+  padding: 0.75rem 1.5rem;
+  background: #0d6efd;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0 0 0.25rem 0.25rem;
+  transition: top 0.3s ease;
+  z-index: 10001;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #ffc107;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Focus Indicators
+   ========================================================================== */
+
+/* Enhanced focus for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+  outline: 3px solid #0d6efd;
+  outline-offset: 2px;
+  transition: outline 0.2s ease;
+}
+
+/* High contrast focus for map paths */
+.map-container path:focus {
+  outline: 3px solid #ffc107;
+  outline-offset: 3px;
+  fill: rgba(255, 193, 7, 0.4) !important;
+}
+
+/* Focus within style for containers */
+.map-container:focus-within {
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+/* Remove focus outline for mouse users (preserve for keyboard) */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Keyboard Navigation Hints
+   ========================================================================== */
+
+.keyboard-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.map-container:focus-within .keyboard-hint {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Modal Accessibility
+   ========================================================================== */
+
+.modal {
+  /* Ensure modals are announced properly */
+  role: dialog;
+}
+
+.modal-dialog {
+  /* Prevent focus from leaving modal */
+  isolation: isolate;
+}
+
+.modal-backdrop {
+  /* Ensure backdrop doesn't interfere with screen readers */
+  pointer-events: none;
+}
+
+.modal.show .modal-backdrop {
+  pointer-events: auto;
+}
+
+/* Enhanced focus for modal close button */
+.modal .btn-close:focus {
+  outline: 3px solid #ffc107;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+/* ==========================================================================
+   Table Accessibility
+   ========================================================================== */
+
+.table {
+  /* Ensure proper table structure for screen readers */
+  border-collapse: collapse;
+}
+
+.table th {
+  /* Ensure headers are properly announced */
+  font-weight: 600;
+}
+
+.table tbody tr:focus-within {
+  background-color: rgba(13, 110, 253, 0.1);
+  outline: 2px solid #0d6efd;
+  outline-offset: -2px;
+}
+
+.table a:focus {
+  outline-color: #ffc107;
+}
+
+/* ==========================================================================
+   Tooltip Accessibility
+   ========================================================================== */
+
+#tooltip {
+  /* Ensure tooltip is announced to screen readers */
+  role: tooltip;
+}
+
+/* Don't hide tooltip when focused */
+#tooltip:focus {
+  display: block !important;
+}
+
+/* ==========================================================================
+   Button and Link Accessibility
+   ========================================================================== */
+
+/* Ensure minimum touch target size (44x44px) */
+button,
+.btn,
+a,
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Exception for small inline links */
+a:not(.btn):not([role="button"]) {
+  min-height: auto;
+  min-width: auto;
+  display: inline;
+}
+
+/* Ensure links have underline for visibility */
+a:not(.btn):not(.skip-link) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:not(.btn):not(.skip-link):hover,
+a:not(.btn):not(.skip-link):focus {
+  text-decoration-thickness: 2px;
+}
+
+/* ==========================================================================
+   Loading State Accessibility
+   ========================================================================== */
+
+.loading-overlay {
+  /* Ensure loading state is announced */
+  role: alert;
+  aria-live: assertive;
+}
+
+/* ==========================================================================
+   Error State Accessibility
+   ========================================================================== */
+
+.toast {
+  /* Ensure toasts are announced */
+  role: alert;
+}
+
+.toast[data-type="error"] {
+  /* Errors should be assertive */
+  aria-live: assertive;
+}
+
+.toast[data-type="warning"] {
+  /* Warnings should be polite */
+  aria-live: polite;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .modal.fade .modal-dialog {
+    transition: none;
+  }
+
+  .carousel-item {
+    transition: none;
+  }
+
+  .toast {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  /* Enhanced borders for better visibility */
+  .map-container path {
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .modal-content {
+    border: 2px solid currentColor;
+  }
+
+  .table {
+    border: 1px solid currentColor;
+  }
+
+  .table th,
+  .table td {
+    border: 1px solid currentColor;
+  }
+
+  /* Enhanced focus indicators */
+  *:focus-visible {
+    outline-width: 4px;
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Accessibility
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .skip-link {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .skip-link:focus {
+    outline-color: #ffc107;
+  }
+
+  #tooltip {
+    background: rgba(0, 0, 0, 0.95);
+    border-color: #444;
+  }
+}
+
+/* ==========================================================================
+   Responsive Accessibility
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Larger touch targets on mobile */
+  button,
+  .btn,
+  [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Larger focus indicators on mobile */
+  *:focus-visible {
+    outline-width: 4px;
+  }
+}
+
+/* ==========================================================================
+   Print Accessibility
+   ========================================================================== */
+
+@media print {
+  /* Hide interactive elements that don't make sense in print */
+  .skip-links,
+  .keyboard-hint,
+  .sr-only {
+    display: none !important;
+  }
+
+  /* Show all focus indicators as borders */
+  *:focus {
+    outline: 2px solid #000 !important;
+  }
+}
