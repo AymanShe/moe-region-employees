@@ -19,11 +19,20 @@ class EmployeeMapApp {
   async init() {
     try {
       console.log('Initializing Employee Map Application...');
+
+      // Show loading indicator
+      ErrorHandler.showLoading('جاري تحميل البيانات...');
+
       await this.loadData();
       this.cacheElements();
       this.setupEventListeners();
+
+      // Hide loading indicator
+      ErrorHandler.hideLoading();
+
       console.log('Application initialized successfully');
     } catch (error) {
+      ErrorHandler.hideLoading();
       this.handleError('Failed to initialize application', error);
     }
   }
@@ -41,10 +50,27 @@ class EmployeeMapApp {
       }
 
       const data = await response.json();
+
+      // Validate data structure
+      try {
+        DataValidator.validateData(data);
+      } catch (validationError) {
+        ErrorHandler.handleValidationError(validationError);
+        // Continue anyway with whatever data we have
+      }
+
       this.regionData = data.regions;
 
       console.log(`Loaded ${data.metadata.totalEmployees} employees across ${data.metadata.totalRegions} regions`);
     } catch (error) {
+      ErrorHandler.logError('loadData', error, {
+        url: 'data/regions.json'
+      });
+
+      if (error.message.includes('HTTP')) {
+        ErrorHandler.handleNetworkError(error);
+      }
+
       throw new Error('Failed to load employee data: ' + error.message);
     }
   }
@@ -211,10 +237,13 @@ class EmployeeMapApp {
    * Open modal showing employee details
    */
   openEmployeeModal(employee) {
-    // Generate carousel items
+    // Generate carousel items with error handling
     const carouselItems = employee.images.map((src, i) => `
       <div class="carousel-item ${i === 0 ? 'active' : ''}">
-        <img src="${src}" class="d-block w-100" alt="${employee.name}">
+        <img src="${src}"
+             class="d-block w-100"
+             alt="${employee.name}"
+             onerror="ImageHandler.handleImageError(this, '${employee.name}')">
       </div>
     `).join('');
 
@@ -249,18 +278,28 @@ class EmployeeMapApp {
   handleError(message, error) {
     console.error(message, error);
 
-    // Show user-friendly error message
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'alert alert-danger alert-dismissible fade show';
-    errorDiv.setAttribute('role', 'alert');
-    errorDiv.innerHTML = `
-      <strong>خطأ!</strong> ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
-    `;
+    // Log error for debugging
+    ErrorHandler.logError('Application Error', error, { context: message });
 
-    document.body.insertBefore(errorDiv, document.body.firstChild);
+    // Show user-friendly error message
+    ErrorHandler.showError('حدث خطأ أثناء تحميل التطبيق. يرجى تحديث الصفحة.', 'error');
   }
 }
+
+// Monitor network status
+window.addEventListener('online', () => {
+  console.log('Network connection restored');
+  const statusDiv = document.querySelector('.network-status');
+  if (statusDiv) statusDiv.remove();
+});
+
+window.addEventListener('offline', () => {
+  console.warn('Network connection lost');
+  const statusDiv = document.createElement('div');
+  statusDiv.className = 'network-status offline';
+  statusDiv.textContent = 'لا يوجد اتصال بالإنترنت';
+  document.body.appendChild(statusDiv);
+});
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#e9ecef"/>
+
+  <!-- User icon -->
+  <g transform="translate(200, 150)">
+    <!-- Head -->
+    <circle cx="0" cy="-20" r="35" fill="#adb5bd"/>
+
+    <!-- Body -->
+    <path d="M -50,60 Q -50,20 -35,10 L -35,10 Q 0,0 35,10 L 35,10 Q 50,20 50,60 Z" fill="#adb5bd"/>
+  </g>
+
+  <!-- "No Image" text -->
+  <text x="200" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6c757d">
+    صورة غير متوفرة
+  </text>
+</svg>
