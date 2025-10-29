@@ -1,0 +1,39 @@
+# Logs
+*.log
+server.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if added later)
+node_modules/
+package-lock.json
+
+# Dependencies
+bower_components/
+
+# Build output (if added later)
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Binary files (optional - keep if needed for project)
+# *.pptx
+# *.jpg
+# *.png

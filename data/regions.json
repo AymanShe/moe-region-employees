@@ -1,0 +1,543 @@
+{
+  "regions": {
+    "SA-01": {
+      "id": "SA-01",
+      "name": "منطقة الرياض",
+      "nameEn": "Riyadh Region",
+      "employees": [
+        {
+          "id": "emp001",
+          "name": "أحمد السعود",
+          "nameEn": "Ahmad Al Saud",
+          "position": "مهندس برمجيات",
+          "positionEn": "Software Engineer",
+          "startDate": "2018-03-12",
+          "images": [
+            "images/ahmad_alsaud1.jpg",
+            "images/ahmad_alsaud2.jpg"
+          ],
+          "cv": "cvs/ahmad_alsaud.pdf"
+        },
+        {
+          "id": "emp002",
+          "name": "فاطمة النجار",
+          "nameEn": "Fatima Al Najjar",
+          "position": "مديرة مشروع",
+          "positionEn": "Project Manager",
+          "startDate": "2019-07-01",
+          "images": [
+            "images/fatima_alnajjar1.jpg",
+            "images/fatima_alnajjar2.jpg"
+          ],
+          "cv": "cvs/fatima_alnajjar.pdf"
+        },
+        {
+          "id": "emp003",
+          "name": "طلال الرشيد",
+          "nameEn": "Talal Al Rashid",
+          "position": "محلل أعمال",
+          "positionEn": "Business Analyst",
+          "startDate": "2021-01-15",
+          "images": [
+            "images/talal_alrashid1.jpg",
+            "images/talal_alrashid2.jpg"
+          ],
+          "cv": "cvs/talal_alrashid.pdf"
+        }
+      ]
+    },
+    "SA-02": {
+      "id": "SA-02",
+      "name": "منطقة مكة المكرمة",
+      "nameEn": "Makkah Region",
+      "employees": [
+        {
+          "id": "emp004",
+          "name": "سارة الحربي",
+          "nameEn": "Sara Al Harbi",
+          "position": "أخصائية موارد بشرية",
+          "positionEn": "HR Specialist",
+          "startDate": "2020-05-22",
+          "images": [
+            "images/sara_alharbi1.jpg",
+            "images/sara_alharbi2.jpg"
+          ],
+          "cv": "cvs/sara_alharbi.pdf"
+        },
+        {
+          "id": "emp005",
+          "name": "محمد الغامدي",
+          "nameEn": "Mohammed Al Ghamdi",
+          "position": "مسؤول شبكات",
+          "positionEn": "Network Administrator",
+          "startDate": "2017-11-30",
+          "images": [
+            "images/mohammed_alghamdi1.jpg",
+            "images/mohammed_alghamdi2.jpg"
+          ],
+          "cv": "cvs/mohammed_alghamdi.pdf"
+        }
+      ]
+    },
+    "SA-03": {
+      "id": "SA-03",
+      "name": "المدينة المنورة",
+      "nameEn": "Al Madinah",
+      "employees": [
+        {
+          "id": "emp006",
+          "name": "نور الزهراني",
+          "nameEn": "Noor Al Zahrani",
+          "position": "منسقة تسويق",
+          "positionEn": "Marketing Coordinator",
+          "startDate": "2019-09-10",
+          "images": [
+            "images/noor_alzahrani1.jpg",
+            "images/noor_alzahrani2.jpg"
+          ],
+          "cv": "cvs/noor_alzahrani.pdf"
+        },
+        {
+          "id": "emp007",
+          "name": "خالد القرشي",
+          "nameEn": "Khalid Al Qurashi",
+          "position": "عالم بيانات",
+          "positionEn": "Data Scientist",
+          "startDate": "2022-02-20",
+          "images": [
+            "images/khalid_alqurashi1.jpg",
+            "images/khalid_alqurashi2.jpg"
+          ],
+          "cv": "cvs/khalid_alqurashi.pdf"
+        },
+        {
+          "id": "emp008",
+          "name": "عائشة العامري",
+          "nameEn": "Aisha Al Amri",
+          "position": "مصممة تجربة مستخدم",
+          "positionEn": "UX Designer",
+          "startDate": "2021-06-05",
+          "images": [
+            "images/aisha_alamri1.jpg",
+            "images/aisha_alamri2.jpg"
+          ],
+          "cv": "cvs/aisha_alamri.pdf"
+        },
+        {
+          "id": "emp009",
+          "name": "يوسف الشمري",
+          "nameEn": "Yousuf Al Shammari",
+          "position": "مهندس ضمان جودة",
+          "positionEn": "QA Engineer",
+          "startDate": "2018-12-01",
+          "images": [
+            "images/yousuf_alshammari1.jpg",
+            "images/yousuf_alshammari2.jpg"
+          ],
+          "cv": "cvs/yousuf_alshammari.pdf"
+        }
+      ]
+    },
+    "SA-04": {
+      "id": "SA-04",
+      "name": "المنطقة الشرقية",
+      "nameEn": "Eastern Province",
+      "employees": [
+        {
+          "id": "emp010",
+          "name": "حسن العتيبي",
+          "nameEn": "Hassan Al Otaibi",
+          "position": "مدير عمليات",
+          "positionEn": "Operations Manager",
+          "startDate": "2016-08-14",
+          "images": [
+            "images/hassan_alotaibi1.jpg",
+            "images/hassan_alotaibi2.jpg"
+          ],
+          "cv": "cvs/hassan_alotaibi.pdf"
+        },
+        {
+          "id": "emp011",
+          "name": "ليلى الشهري",
+          "nameEn": "Laila Al Shahri",
+          "position": "محللة مالية",
+          "positionEn": "Financial Analyst",
+          "startDate": "2018-04-19",
+          "images": [
+            "images/laila_alshahri1.jpg",
+            "images/laila_alshahri2.jpg"
+          ],
+          "cv": "cvs/laila_alshahri.pdf"
+        },
+        {
+          "id": "emp012",
+          "name": "سليمان الشمري",
+          "nameEn": "Suleiman Al Shammari",
+          "position": "مهندس شبكات",
+          "positionEn": "Network Engineer",
+          "startDate": "2020-11-25",
+          "images": [
+            "images/suleiman_alshammari1.jpg",
+            "images/suleiman_alshammari2.jpg"
+          ],
+          "cv": "cvs/suleiman_alshammari.pdf"
+        }
+      ]
+    },
+    "SA-05": {
+      "id": "SA-05",
+      "name": "منطقة القصيم",
+      "nameEn": "Al Qassim Region",
+      "employees": [
+        {
+          "id": "emp013",
+          "name": "نجلاء الرشيد",
+          "nameEn": "Najla Al Rashid",
+          "position": "مديرة موارد بشرية",
+          "positionEn": "HR Manager",
+          "startDate": "2017-02-28",
+          "images": [
+            "images/najla_alrashid1.jpg",
+            "images/najla_alrashid2.jpg"
+          ],
+          "cv": "cvs/najla_alrashid.pdf"
+        },
+        {
+          "id": "emp014",
+          "name": "عبدالعزيز القحطاني",
+          "nameEn": "Abdulaziz Al Qahtani",
+          "position": "محلل نظم",
+          "positionEn": "Systems Analyst",
+          "startDate": "2019-10-14",
+          "images": [
+            "images/abdulaziz_alqahtani1.jpg",
+            "images/abdulaziz_alqahtani2.jpg"
+          ],
+          "cv": "cvs/abdulaziz_alqahtani.pdf"
+        }
+      ]
+    },
+    "SA-06": {
+      "id": "SA-06",
+      "name": "منطقة حائل",
+      "nameEn": "Hail Region",
+      "employees": [
+        {
+          "id": "emp015",
+          "name": "ماجد العرادي",
+          "nameEn": "Majed Al Aradi",
+          "position": "منسق إقليمي",
+          "positionEn": "Regional Coordinator",
+          "startDate": "2018-05-10",
+          "images": [
+            "images/majed_alaradi1.jpg",
+            "images/majed_alaradi2.jpg"
+          ],
+          "cv": "cvs/majed_alaradi.pdf"
+        },
+        {
+          "id": "emp016",
+          "name": "نورة الحربي",
+          "nameEn": "Nora Al Harbi",
+          "position": "ضابط علاقات عامة",
+          "positionEn": "Public Relations Officer",
+          "startDate": "2019-12-01",
+          "images": [
+            "images/nora_alharbi1.jpg",
+            "images/nora_alharbi2.jpg"
+          ],
+          "cv": "cvs/nora_alharbi.pdf"
+        }
+      ]
+    },
+    "SA-07": {
+      "id": "SA-07",
+      "name": "منطقة تبوك",
+      "nameEn": "Tabuk Region",
+      "employees": [
+        {
+          "id": "emp017",
+          "name": "أميرة النعيمي",
+          "nameEn": "Amira Al Naimi",
+          "position": "مديرة الموردين",
+          "positionEn": "Vendor Manager",
+          "startDate": "2016-09-11",
+          "images": [
+            "images/amira_alnaimi1.jpg",
+            "images/amira_alnaimi2.jpg"
+          ],
+          "cv": "cvs/amira_alnaimi.pdf"
+        },
+        {
+          "id": "emp018",
+          "name": "سعود القرني",
+          "nameEn": "Saud Al Qarni",
+          "position": "محلل بيانات",
+          "positionEn": "Data Analyst",
+          "startDate": "2020-04-22",
+          "images": [
+            "images/saud_alqarni1.jpg",
+            "images/saud_alqarni2.jpg"
+          ],
+          "cv": "cvs/saud_alqarni.pdf"
+        },
+        {
+          "id": "emp019",
+          "name": "ريم الدوسري",
+          "nameEn": "Reem Al Dosari",
+          "position": "مهندسة برمجيات",
+          "positionEn": "Software Engineer",
+          "startDate": "2021-08-05",
+          "images": [
+            "images/reem_aldosari1.jpg",
+            "images/reem_aldosari2.jpg"
+          ],
+          "cv": "cvs/reem_aldosari.pdf"
+        }
+      ]
+    },
+    "SA-08": {
+      "id": "SA-08",
+      "name": "منطقة الحدود الشمالية",
+      "nameEn": "Northern Borders Region",
+      "employees": [
+        {
+          "id": "emp020",
+          "name": "فهد الرشيدي",
+          "nameEn": "Fahad Al Rashidi",
+          "position": "مدير مشاريع",
+          "positionEn": "Project Manager",
+          "startDate": "2017-06-30",
+          "images": [
+            "images/fahad_alrashidi1.jpg",
+            "images/fahad_alrashidi2.jpg"
+          ],
+          "cv": "cvs/fahad_alrashidi.pdf"
+        },
+        {
+          "id": "emp021",
+          "name": "عائشة الزهراني",
+          "nameEn": "Aisha Al Zahrani",
+          "position": "أخصائية تسويق",
+          "positionEn": "Marketing Specialist",
+          "startDate": "2019-03-15",
+          "images": [
+            "images/aisha_alzahrani1.jpg",
+            "images/aisha_alzahrani2.jpg"
+          ],
+          "cv": "cvs/aisha_alzahrani.pdf"
+        }
+      ]
+    },
+    "SA-09": {
+      "id": "SA-09",
+      "name": "منطقة جازان",
+      "nameEn": "Jazan Region",
+      "employees": [
+        {
+          "id": "emp022",
+          "name": "ياسر القحطاني",
+          "nameEn": "Yasser Al Qahtani",
+          "position": "مهندس نظم",
+          "positionEn": "Systems Engineer",
+          "startDate": "2018-07-07",
+          "images": [
+            "images/yasser_alqahtani1.jpg",
+            "images/yasser_alqahtani2.jpg"
+          ],
+          "cv": "cvs/yasser_alqahtani.pdf"
+        },
+        {
+          "id": "emp023",
+          "name": "جميلة الحربي",
+          "nameEn": "Jameela Al Harbi",
+          "position": "محللة أعمال",
+          "positionEn": "Business Analyst",
+          "startDate": "2020-10-20",
+          "images": [
+            "images/jameela_alharbi1.jpg",
+            "images/jameela_alharbi2.jpg"
+          ],
+          "cv": "cvs/jameela_alharbi.pdf"
+        }
+      ]
+    },
+    "SA-10": {
+      "id": "SA-10",
+      "name": "منطقة نجران",
+      "nameEn": "Najran Region",
+      "employees": [
+        {
+          "id": "emp024",
+          "name": "نواف السبيعي",
+          "nameEn": "Nawaf Al Saibai",
+          "position": "مهندس ميكانيكي",
+          "positionEn": "Mechanical Engineer",
+          "startDate": "2017-11-08",
+          "images": [
+            "images/nawaf_alsaibai1.jpg",
+            "images/nawaf_alsaibai2.jpg"
+          ],
+          "cv": "cvs/nawaf_alsaibai.pdf"
+        },
+        {
+          "id": "emp025",
+          "name": "هاجر الشهراني",
+          "nameEn": "Hajar Al Shahrani",
+          "position": "محاسبة",
+          "positionEn": "Accountant",
+          "startDate": "2021-01-25",
+          "images": [
+            "images/hajar_alshahrani1.jpg",
+            "images/hajar_alshahrani2.jpg"
+          ],
+          "cv": "cvs/hajar_alshahrani.pdf"
+        }
+      ]
+    },
+    "SA-11": {
+      "id": "SA-11",
+      "name": "منطقة الباحة",
+      "nameEn": "Al Bahah Region",
+      "employees": [
+        {
+          "id": "emp026",
+          "name": "عبير القحطاني",
+          "nameEn": "Abeer Al Qahtani",
+          "position": "ضمان الجودة",
+          "positionEn": "Quality Assurance",
+          "startDate": "2018-11-30",
+          "images": [
+            "images/abeer_alqahtani1.jpg",
+            "images/abeer_alqahtani2.jpg"
+          ],
+          "cv": "cvs/abeer_alqahtani.pdf"
+        },
+        {
+          "id": "emp027",
+          "name": "عبدالله الحامد",
+          "nameEn": "Abdullah Al Hamad",
+          "position": "مهندس نظم",
+          "positionEn": "Systems Engineer",
+          "startDate": "2020-02-03",
+          "images": [
+            "images/abdullah_alhamad1.jpg",
+            "images/abdullah_alhamad2.jpg"
+          ],
+          "cv": "cvs/abdullah_alhamad.pdf"
+        }
+      ]
+    },
+    "SA-12": {
+      "id": "SA-12",
+      "name": "منطقة الجوف",
+      "nameEn": "Al Jouf Region",
+      "employees": [
+        {
+          "id": "emp028",
+          "name": "سعد العتيبي",
+          "nameEn": "Saad Al Otaibi",
+          "position": "مدير مبيعات",
+          "positionEn": "Sales Manager",
+          "startDate": "2016-07-22",
+          "images": [
+            "images/saad_alotaibi1.jpg",
+            "images/saad_alotaibi2.jpg"
+          ],
+          "cv": "cvs/saad_alotaibi.pdf"
+        },
+        {
+          "id": "emp029",
+          "name": "نجوى العنزي",
+          "nameEn": "Najwa Al Anzi",
+          "position": "مصممة جرافيك",
+          "positionEn": "Graphic Designer",
+          "startDate": "2019-08-05",
+          "images": [
+            "images/najwa_alanzi1.jpg",
+            "images/najwa_alanzi2.jpg"
+          ],
+          "cv": "cvs/najwa_alanzi.pdf"
+        },
+        {
+          "id": "emp030",
+          "name": "إبراهيم الرويس",
+          "nameEn": "Ibrahim Al Ruwais",
+          "position": "محلل بيانات",
+          "positionEn": "Data Analyst",
+          "startDate": "2021-09-17",
+          "images": [
+            "images/ibrahim_alruwais1.jpg",
+            "images/ibrahim_alruwais2.jpg"
+          ],
+          "cv": "cvs/ibrahim_alruwais.pdf"
+        },
+        {
+          "id": "emp031",
+          "name": "سلمى القحطاني",
+          "nameEn": "Salma Al Qahtani",
+          "position": "أخصائية تسويق",
+          "positionEn": "Marketing Specialist",
+          "startDate": "2022-06-12",
+          "images": [
+            "images/salma_alqahtani1.jpg",
+            "images/salma_alqahtani2.jpg"
+          ],
+          "cv": "cvs/salma_alqahtani.pdf"
+        }
+      ]
+    },
+    "SA-14": {
+      "id": "SA-14",
+      "name": "منطقة عسير",
+      "nameEn": "Asir Region",
+      "employees": [
+        {
+          "id": "emp032",
+          "name": "وليد الشهري",
+          "nameEn": "Waleed Al Shahri",
+          "position": "منسق إقليمي",
+          "positionEn": "Regional Coordinator",
+          "startDate": "2017-12-09",
+          "images": [
+            "images/waleed_alshahri1.jpg",
+            "images/waleed_alshahri2.jpg"
+          ],
+          "cv": "cvs/waleed_alshahri.pdf"
+        },
+        {
+          "id": "emp033",
+          "name": "أمل الأحمدي",
+          "nameEn": "Amal Al Ahmadi",
+          "position": "ضابط علاقات عامة",
+          "positionEn": "Public Relations Officer",
+          "startDate": "2018-05-14",
+          "images": [
+            "images/amal_alahmadi1.jpg",
+            "images/amal_alahmadi2.jpg"
+          ],
+          "cv": "cvs/amal_alahmadi.pdf"
+        },
+        {
+          "id": "emp034",
+          "name": "فيصل المطيري",
+          "nameEn": "Faisal Al Mutairi",
+          "position": "مهندس شبكات",
+          "positionEn": "Network Engineer",
+          "startDate": "2020-10-23",
+          "images": [
+            "images/faisal_almutairi1.jpg",
+            "images/faisal_almutairi2.jpg"
+          ],
+          "cv": "cvs/faisal_almutairi.pdf"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-10-29",
+    "version": "1.0.0",
+    "totalEmployees": 34,
+    "totalRegions": 13
+  }
+}
