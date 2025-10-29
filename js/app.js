@@ -26,6 +26,11 @@ class EmployeeMapApp {
         window.AccessibilityManager.announceLoading('جاري تحميل البيانات');
       }
 
+      // Initialize mobile optimizations
+      if (window.MobileOptimizer) {
+        window.MobileOptimizer.init();
+      }
+
       // Show loading indicator
       ErrorHandler.showLoading('جاري تحميل البيانات...');
 

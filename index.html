@@ -2,6 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="color-scheme" content="light only">
   <title>خريطة السعودية التفاعلية</title>
 
   <!-- Bootstrap RTL CSS -->
@@ -16,8 +20,16 @@
   <!-- Accessibility CSS -->
   <link rel="stylesheet" href="css/accessibility.css">
 
+  <!-- Mobile Optimization CSS -->
+  <link rel="stylesheet" href="css/mobile.css">
+
   <style>
-    body, html { margin:0; padding:0; height:100%; }
+    /* Force light mode */
+    :root {
+      color-scheme: light only;
+    }
+
+    body, html { margin:0; padding:0; height:100%; background-color: #ffffff; color: #212529; }
     .map-container { position: relative; width:100%; max-width:800px; margin:20px auto; }
     .map-container svg { width:100%; height:auto; display:block; }
     #tooltip {
@@ -31,6 +43,27 @@
       stroke: rgba(52,152,219,0.5); stroke-width:1; transition: fill .2s;
     }
     .map-container path:hover { fill: rgba(52,152,219,0.3); }
+
+    /* Mobile override */
+    @media (max-width: 768px) {
+      .map-container {
+        margin: 0 auto;
+        max-width: 100%;
+        width: 100%;
+        padding: 10px;
+        height: auto;
+        box-sizing: border-box;
+      }
+      .map-container svg {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100% !important;
+      }
+      body, html {
+        overflow-x: hidden;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -142,6 +175,7 @@
   <!-- External JavaScript -->
   <script src="js/error-handler.js"></script>
   <script src="js/accessibility.js"></script>
+  <script src="js/mobile.js"></script>
   <script src="js/app.js"></script>
 
 </body>
