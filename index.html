@@ -23,14 +23,17 @@
   <!-- Mobile Optimization CSS -->
   <link rel="stylesheet" href="css/mobile.css">
 
+  <!-- UX Engagement Enhancements CSS -->
+  <link rel="stylesheet" href="css/ux-engagement.css">
+
   <style>
     /* Force light mode */
     :root {
       color-scheme: light only;
     }
 
-    body, html { margin:0; padding:0; height:100%; background-color: #ffffff; color: #212529; }
-    .map-container { position: relative; width:100%; max-width:800px; margin:20px auto; }
+    body, html { margin:0; padding:0; min-height:100%; background-color: #ffffff; color: #212529; }
+    .map-container { position: relative; width:100%; margin:0; }
     .map-container svg { width:100%; height:auto; display:block; }
     #tooltip {
       position: absolute; pointer-events: none; display: none;
@@ -47,11 +50,7 @@
     /* Mobile override */
     @media (max-width: 768px) {
       .map-container {
-        margin: 0 auto;
-        max-width: 100%;
-        width: 100%;
         padding: 10px;
-        height: auto;
         box-sizing: border-box;
       }
       .map-container svg {
@@ -68,8 +67,10 @@
 </head>
 <body>
 
-  <div class="map-container" id="map-container">
-    <div id="tooltip"></div>
+  <div class="app-shell" id="appShell">
+    <section class="map-column" id="mapColumn">
+      <div class="map-container" id="map-container">
+        <div id="tooltip"></div>
 
     <!-- INLINE SVG START -->
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -136,23 +137,37 @@
          d="m 303.24718,558.19041 -1.98,-3.01 -2.95,-0.6 -0.68,-0.57 -2.65,-4.63 -3.6,-1.82 0.14,-4.42 -1,-1.12 -2.21,0.88 -2.87,2.16 -1.21,2.1 -1.66,6.75 -0.57,0.66 -1.4,0.14 -1.52,-0.63 -3.25,-3.16 -1.59,-3.73 -1.28,-1.24 -8.28,-0.4 -0.73,-0.64 -0.85,-2.89 -1.08,-1.35 -2.16,-0.23 -2.94,0.45 -0.74,-0.47 -0.28,-1.5 0.83,-7.27 -1.27,-1.03 -4.46,0.47 0,0 1.5,-6.41 -2.97,-9.14 -2.11,-1.2 -6.71,-0.21 -1.43,-0.49 -1.03,-1.47 -0.61,-2.97 0.49,-10 1.97,1.88 0.75,-0.06 3.87,-2.82 2.24,-0.38 4.74,0.44 1.52,-0.75 0.76,-1.42 1.27,-4.6 -2.19,-4.44 1.31,-6.92 -0.21,-1.51 -1.85,-1.89 -2.29,-0.13 -1.5,0.74 0,0 4.26,-8.69 -0.23,-3.55 0.84,-1.79 5.82,-3.97 1.04,-1.45 -0.11,-1.59 -2.05,-1.97 -0.23,-0.79 2.15,-6.42 0,0 4.67,9.08 1.4,1.02 2.28,0.24 2.31,-1.13 10.11,-9.25 6.41,-3.06 4.26,-3.8 4.55,-0.28 3.16,-1.52 2.26,-0.24 5.21,1.3 5.72,-3.77 4.02,-1.46 0,0 5.76,5.01 3.07,4.93 3.6,3.6 1.06,1.73 -0.08,2.96 -3.34,6.09 -1.23,6.11 0.22,1.6 2.75,2.96 3.91,6.36 13.54,12.09 0,0 -0.04,6.08 -1.12,1.39 -3.85,1.94 -0.69,1.59 1.76,8.57 -0.17,2.12 -0.97,2.22 -1.22,1.41 -2.38,1.42 -6.32,2.02 -0.95,1.05 -1.06,3.02 -1.08,1.48 -8.21,7.56 -3.08,3.43 -0.88,1.69 -0.08,1.66 1.38,6.12 -0.77,8.37 -0.67,1.47 1.3,5.93 -1.15,3.24 0,0 -0.11,1.8 -2.37,-2.3 -5.29,-3.37 -2.46,-0.34 z"
          title="'Asir"
          id="SA-14" />
-    </svg>
-    
-    <!-- INLINE SVG END -->
+        </svg>
+        
+        <!-- INLINE SVG END -->
+      </div>
+    </section>
+
+    <aside class="region-panel" id="regionPanel" aria-labelledby="regionPanelTitle" aria-hidden="true">
+      <div class="region-panel__header">
+        <div class="region-panel__controls">
+          <button type="button" class="region-panel__nav region-panel__nav--prev" id="regionPanelPrev" aria-label="المنطقة السابقة">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="region-panel__title-group">
+            <h2 class="region-panel__title" id="regionPanelTitle"></h2>
+            <p class="region-panel__meta" id="regionPanelMeta"></p>
+          </div>
+          <button type="button" class="region-panel__nav region-panel__nav--next" id="regionPanelNext" aria-label="المنطقة التالية">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+        <button type="button" class="region-panel__close" id="regionPanelClose" aria-label="إغلاق اللوحة">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="region-panel__body" id="regionPanelBody" tabindex="-1">
+        <p class="region-panel__placeholder">اختر منطقة من الخريطة لعرض الموظفين.</p>
+      </div>
+    </aside>
   </div>
 
-  <!-- Region Modal -->
-  <div class="modal fade" id="regionModal" tabindex="-1" aria-labelledby="regionModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-end">
-        <div class="modal-header">
-          <h5 class="modal-title" id="regionModalLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
-        </div>
-        <div class="modal-body" id="modalBody"><!-- filled by JS --></div>
-      </div>
-    </div>
-  </div>
+  <div class="region-panel-backdrop" id="regionPanelBackdrop" hidden></div>
 
   <!-- Employee Modal -->
   <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">

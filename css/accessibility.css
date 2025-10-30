@@ -58,7 +58,7 @@
 
 .skip-link:focus {
   top: 0;
-  outline: 3px solid #ffc107;
+  outline: 3px solid #0d6efd;
   outline-offset: 2px;
 }
 
@@ -68,26 +68,30 @@
 
 /* Enhanced focus for all interactive elements */
 a:focus,
+a:focus-visible,
 button:focus,
+button:focus-visible,
 input:focus,
+input:focus-visible,
 select:focus,
+select:focus-visible,
 textarea:focus,
-[tabindex]:focus {
-  outline: 3px solid #0d6efd;
-  outline-offset: 2px;
-  transition: outline 0.2s ease;
+textarea:focus-visible,
+[tabindex]:focus,
+[tabindex]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* High contrast focus for map paths */
-.map-container path:focus {
-  outline: 3px solid #ffc107;
-  outline-offset: 3px;
-  fill: rgba(255, 193, 7, 0.4) !important;
+.map-container path:focus-visible {
+  outline: none;
+  fill: inherit !important;
 }
 
 /* Focus within style for containers */
 .map-container:focus-within {
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+  box-shadow: none;
 }
 
 /* Remove focus outline for mouse users (preserve for keyboard) */
@@ -96,8 +100,8 @@ textarea:focus,
 }
 
 *:focus-visible {
-  outline: 3px solid #0d6efd;
-  outline-offset: 2px;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ==========================================================================
@@ -147,10 +151,10 @@ textarea:focus,
 }
 
 /* Enhanced focus for modal close button */
-.modal .btn-close:focus {
-  outline: 3px solid #ffc107;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+.modal .btn-close:focus,
+.modal .btn-close:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ==========================================================================

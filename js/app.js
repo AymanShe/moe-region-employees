@@ -9,8 +9,23 @@ class EmployeeMapApp {
     this.currentLanguage = 'ar';
     this.container = null;
     this.tooltip = null;
-    this.regionModal = null;
     this.employeeModal = null;
+    this.regionPanel = null;
+    this.regionPanelBody = null;
+    this.regionPanelTitle = null;
+    this.regionPanelMeta = null;
+    this.regionPanelPrev = null;
+    this.regionPanelNext = null;
+    this.regionPanelClose = null;
+    this.regionPanelBackdrop = null;
+    this.regionOrder = [];
+    this.currentRegionId = null;
+    this.lastFocusedPath = null;
+    this.touchStartX = null;
+
+    this.handleGlobalKeydown = this.handleGlobalKeydown.bind(this);
+    this.handlePanelTouchStart = this.handlePanelTouchStart.bind(this);
+    this.handlePanelTouchEnd = this.handlePanelTouchEnd.bind(this);
   }
 
   /**
@@ -104,12 +119,20 @@ class EmployeeMapApp {
     this.container = document.getElementById('map-container');
     this.tooltip = document.getElementById('tooltip');
 
-    // Region modal elements
-    const regionModalEl = document.getElementById('regionModal');
-    this.regionModal = new bootstrap.Modal(regionModalEl);
-    this.regionModalTitle = document.getElementById('regionModalLabel');
-    this.regionModalBody = document.getElementById('modalBody');
-    this.regionModalEl = regionModalEl;
+    // Region panel elements
+    this.regionPanel = document.getElementById('regionPanel');
+    this.regionPanelBody = document.getElementById('regionPanelBody');
+    this.regionPanelTitle = document.getElementById('regionPanelTitle');
+    this.regionPanelMeta = document.getElementById('regionPanelMeta');
+    this.regionPanelPrev = document.getElementById('regionPanelPrev');
+    this.regionPanelNext = document.getElementById('regionPanelNext');
+    this.regionPanelClose = document.getElementById('regionPanelClose');
+    this.regionPanelBackdrop = document.getElementById('regionPanelBackdrop');
+    this.regionOrder = this.container
+      ? Array.from(this.container.querySelectorAll('path'))
+          .map(path => path.id)
+          .filter(Boolean)
+      : [];
 
     // Employee modal elements
     const employeeModalEl = document.getElementById('employeeModal');
@@ -129,9 +152,32 @@ class EmployeeMapApp {
     });
 
     // Delegate clicks on employee names
-    this.regionModalEl.addEventListener('click', (e) => {
-      this.handleEmployeeLinkClick(e);
-    });
+    if (this.regionPanelBody) {
+      this.regionPanelBody.addEventListener('click', (e) => {
+        this.handleEmployeeLinkClick(e);
+      });
+    }
+
+    // Panel controls
+    if (this.regionPanelPrev) {
+      this.regionPanelPrev.addEventListener('click', () => this.navigateRegion(-1));
+    }
+    if (this.regionPanelNext) {
+      this.regionPanelNext.addEventListener('click', () => this.navigateRegion(1));
+    }
+    if (this.regionPanelClose) {
+      this.regionPanelClose.addEventListener('click', () => this.closeRegionPanel());
+    }
+    if (this.regionPanelBackdrop) {
+      this.regionPanelBackdrop.addEventListener('click', () => this.closeRegionPanel());
+    }
+
+    if (this.regionPanel) {
+      this.regionPanel.addEventListener('touchstart', this.handlePanelTouchStart, { passive: true });
+      this.regionPanel.addEventListener('touchend', this.handlePanelTouchEnd, { passive: true });
+    }
+
+    document.addEventListener('keydown', this.handleGlobalKeydown);
   }
 
   /**
@@ -160,7 +206,8 @@ class EmployeeMapApp {
 
     // Click: open region modal
     path.addEventListener('click', () => {
-      this.openRegionModal(regionId);
+      this.lastFocusedPath = path;
+      this.openRegionPanel(regionId);
     });
   }
 
@@ -189,77 +236,270 @@ class EmployeeMapApp {
   }
 
   /**
-   * Open modal showing all employees in a region
+   * Open the persistent region panel with employees
    */
-  openRegionModal(regionId) {
+  openRegionPanel(regionId, options = {}) {
+    if (!this.regionPanel || !this.regionPanelBody) return;
+
     const region = this.regionData[regionId];
     if (!region) return;
 
-    // Generate employee table rows
-    const rows = region.employees.map((emp, i) => `
-      <tr>
-        <td>
-          <a href="#" class="employee-link"
-             data-region="${regionId}"
-             data-index="${i}">
-            ${emp.name}
-          </a>
-        </td>
-        <td>${emp.position}</td>
-        <td>${emp.startDate}</td>
-      </tr>
-    `).join('');
+    const { announce = true, focusPanel = true } = options;
+    this.currentRegionId = regionId;
 
-    // Set modal content
-    this.regionModalTitle.textContent = region.name;
-    this.regionModalBody.innerHTML = `
-      <h6>الموظفون:</h6>
-      <div class="table-responsive">
-        <table class="table table-striped mb-0">
-          <thead class="table-light">
-            <tr>
-              <th scope="col">الاسم</th>
-              <th scope="col">المنصب</th>
-              <th scope="col">تاريخ البدء</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
+    if (this.regionPanelTitle) {
+      this.regionPanelTitle.textContent = region.name;
+    }
+
+    if (this.regionPanelMeta) {
+      const englishName = region.nameEn ? ` / ${region.nameEn}` : '';
+      this.regionPanelMeta.textContent = `${region.employees.length} موظف${englishName}`;
+    }
+
+    const hasEmployees = Array.isArray(region.employees) && region.employees.length > 0;
+
+    let bodyContent = `
+      <div class="region-panel__summary">
+        <span class="employee-card__badge">${region.employees.length} موظف</span>
+        ${region.nameEn ? `<span class="region-panel__subtitle">${region.nameEn}</span>` : ''}
       </div>
     `;
 
-    // Show modal
-    this.regionModal.show();
+    if (hasEmployees) {
+      const employeesMarkup = region.employees.map((emp, index) => `
+        <button type="button"
+                class="employee-card"
+                data-region="${regionId}"
+                data-index="${index}">
+          <span class="employee-link">
+            <span>${emp.name}</span>
+            ${emp.nameEn ? `<span class="employee-card__name-en">${emp.nameEn}</span>` : ''}
+          </span>
+          <div class="employee-card__details">
+            <span>${emp.position}</span>
+            ${emp.positionEn ? `<span class="employee-card__position-en">${emp.positionEn}</span>` : ''}
+            <span>تاريخ البدء: ${emp.startDate}</span>
+          </div>
+        </button>
+      `).join('');
 
-    // Enhance table accessibility
-    if (window.AccessibilityManager) {
-      const table = this.regionModalBody.querySelector('table');
-      if (table) {
-        window.AccessibilityManager.enhanceTableAccessibility(table);
-      }
+      bodyContent += `<div class="region-panel__list">${employeesMarkup}</div>`;
+    } else {
+      bodyContent += `<p class="region-panel__placeholder">لا يوجد موظفون في هذه المنطقة حالياً.</p>`;
+    }
+
+    this.regionPanelBody.innerHTML = bodyContent;
+    this.regionPanelBody.scrollTop = 0;
+
+    this.regionPanel.classList.add('is-active');
+    this.regionPanel.setAttribute('aria-hidden', 'false');
+
+    if (this.regionPanelBackdrop) {
+      this.regionPanelBackdrop.hidden = false;
+      this.regionPanelBackdrop.classList.add('is-active');
+    }
+
+    this.updatePanelNavigation();
+    this.highlightRegion(regionId);
+
+    if (focusPanel) {
+      requestAnimationFrame(() => {
+        if (this.regionPanelBody) {
+          this.regionPanelBody.focus();
+        }
+      });
+    }
+
+    if (window.AccessibilityManager && announce) {
+      window.AccessibilityManager.announce(`منطقة ${region.name} تحتوي على ${region.employees.length} موظف`);
     }
   }
 
   /**
-   * Handle employee link click from region modal
+   * Close the region panel and reset highlights
+   */
+  closeRegionPanel() {
+    if (!this.regionPanel) return;
+
+    this.regionPanel.classList.remove('is-active');
+    this.regionPanel.setAttribute('aria-hidden', 'true');
+
+    if (this.regionPanelBackdrop) {
+      this.regionPanelBackdrop.classList.remove('is-active');
+      this.regionPanelBackdrop.hidden = true;
+    }
+
+    if (this.regionPanelBody) {
+      this.regionPanelBody.innerHTML = `<p class="region-panel__placeholder">اختر منطقة من الخريطة لعرض الموظفين.</p>`;
+    }
+
+    this.clearRegionHighlight();
+    this.currentRegionId = null;
+    this.updatePanelNavigation();
+    this.touchStartX = null;
+
+    if (this.lastFocusedPath) {
+      this.lastFocusedPath.focus();
+    }
+
+    if (window.AccessibilityManager) {
+      window.AccessibilityManager.announce('تم إغلاق لوحة المنطقة');
+    }
+  }
+
+  /**
+   * Navigate to adjacent region within panel
+   */
+  navigateRegion(direction = 1) {
+    if (!this.isPanelActive()) return;
+
+    const currentIndex = this.regionOrder.indexOf(this.currentRegionId);
+    if (currentIndex === -1) return;
+
+    const nextIndex = currentIndex + direction;
+    if (nextIndex < 0 || nextIndex >= this.regionOrder.length) return;
+
+    const nextRegionId = this.regionOrder[nextIndex];
+    const nextPath = document.getElementById(nextRegionId);
+    if (nextPath) {
+      this.lastFocusedPath = nextPath;
+      nextPath.focus();
+    }
+
+    this.openRegionPanel(nextRegionId, { announce: true, focusPanel: true });
+  }
+
+  /**
+   * Update panel navigation button states
+   */
+  updatePanelNavigation() {
+    const index = this.regionOrder.indexOf(this.currentRegionId);
+    const active = this.isPanelActive();
+
+    if (this.regionPanelPrev) {
+      this.regionPanelPrev.disabled = !active || index <= 0;
+    }
+
+    if (this.regionPanelNext) {
+      this.regionPanelNext.disabled = !active || index === -1 || index >= this.regionOrder.length - 1;
+    }
+  }
+
+  /**
+   * Highlight the active region on the map
+   */
+  highlightRegion(regionId) {
+    if (!this.container) return;
+
+    this.container.querySelectorAll('path').forEach(path => {
+      if (path.id === regionId) {
+        path.classList.add('region-active');
+        path.classList.remove('region-dim');
+        path.setAttribute('aria-current', 'true');
+      } else {
+        path.classList.remove('region-active');
+        path.classList.add('region-dim');
+        path.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  /**
+   * Clear region highlight classes
+   */
+  clearRegionHighlight() {
+    if (!this.container) return;
+
+    this.container.querySelectorAll('path').forEach(path => {
+      path.classList.remove('region-active', 'region-dim');
+      path.removeAttribute('aria-current');
+    });
+  }
+
+  /**
+   * Determine if panel is active
+   */
+  isPanelActive() {
+    return !!(this.regionPanel && this.regionPanel.classList.contains('is-active'));
+  }
+
+  /**
+   * Handle global keyboard shortcuts for the panel
+   */
+  handleGlobalKeydown(event) {
+    if (!this.isPanelActive()) return;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        this.navigateRegion(-1);
+        break;
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        this.navigateRegion(1);
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.closeRegionPanel();
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Start tracking horizontal swipe on the panel
+   */
+  handlePanelTouchStart(event) {
+    if (!this.isPanelActive() || !event.changedTouches || event.changedTouches.length === 0) {
+      return;
+    }
+    this.touchStartX = event.changedTouches[0].clientX;
+  }
+
+  /**
+   * Complete swipe gesture and navigate regions
+   */
+  handlePanelTouchEnd(event) {
+    if (!this.isPanelActive() || this.touchStartX === null || !event.changedTouches || event.changedTouches.length === 0) {
+      this.touchStartX = null;
+      return;
+    }
+
+    const touchEndX = event.changedTouches[0].clientX;
+    const deltaX = touchEndX - this.touchStartX;
+    const threshold = 45;
+
+    if (Math.abs(deltaX) >= threshold) {
+      if (deltaX > 0) {
+        this.navigateRegion(-1);
+      } else {
+        this.navigateRegion(1);
+      }
+    }
+
+    this.touchStartX = null;
+  }
+
+  /**
+   * Handle employee link click from region panel
    */
   handleEmployeeLinkClick(e) {
-    const link = e.target.closest('.employee-link');
+    const link = e.target.closest('.employee-card');
     if (!link) return;
 
     e.preventDefault();
 
-    // Hide region modal
-    this.regionModal.hide();
-
-    // Get employee data
     const regionId = link.dataset.region;
-    const empIndex = parseInt(link.dataset.index);
-    const employee = this.regionData[regionId].employees[empIndex];
+    const empIndex = parseInt(link.dataset.index, 10);
+    const region = this.regionData[regionId];
+    if (!region) return;
 
+    const employee = region.employees[empIndex];
     if (!employee) return;
 
-    // Show employee modal
     this.openEmployeeModal(employee);
   }
 
