@@ -344,7 +344,7 @@
 
 .region-panel-backdrop.is-active {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .map-container path.region-active {
@@ -416,7 +416,7 @@
 
   .region-panel-backdrop {
     display: block;
-    backdrop-filter: blur(3px);
+    background: rgba(13, 110, 253, 0.1);
   }
 }
 
