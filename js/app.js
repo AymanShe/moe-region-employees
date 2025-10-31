@@ -6,6 +6,7 @@
 class EmployeeMapApp {
   constructor() {
     this.regionData = null;
+    this.metadata = { totalRegions: 0, totalEmployees: 0 };
     this.currentLanguage = 'ar';
     this.container = null;
     this.tooltip = null;
@@ -22,6 +23,7 @@ class EmployeeMapApp {
     this.currentRegionId = null;
     this.lastFocusedPath = null;
     this.touchStartX = null;
+    this.visitedRegions = new Set();
 
     this.handleGlobalKeydown = this.handleGlobalKeydown.bind(this);
     this.handlePanelTouchStart = this.handlePanelTouchStart.bind(this);
@@ -97,8 +99,24 @@ class EmployeeMapApp {
       }
 
       this.regionData = data.regions;
+      if (data.metadata) {
+        this.metadata = {
+          totalRegions: data.metadata.totalRegions || Object.keys(data.regions || {}).length,
+          totalEmployees: data.metadata.totalEmployees || 0
+        };
+      }
+      if (!this.metadata.totalEmployees) {
+        this.metadata.totalEmployees = Object.values(this.regionData || {}).reduce((acc, region) => {
+          if (region && Array.isArray(region.employees)) {
+            return acc + region.employees.length;
+          }
+          return acc;
+        }, 0);
+      }
 
-      console.log(`Loaded ${data.metadata.totalEmployees} employees across ${data.metadata.totalRegions} regions`);
+      const totalEmployees = this.metadata.totalEmployees || (data.metadata && data.metadata.totalEmployees) || 0;
+      const totalRegions = this.metadata.totalRegions || (data.metadata && data.metadata.totalRegions) || Object.keys(this.regionData || {}).length;
+      console.log(`Loaded ${totalEmployees} employees across ${totalRegions} regions`);
     } catch (error) {
       ErrorHandler.logError('loadData', error, {
         url: 'data/regions.json'
@@ -133,6 +151,19 @@ class EmployeeMapApp {
           .map(path => path.id)
           .filter(Boolean)
       : [];
+
+    // HUD elements
+    this.hudRegionsVisited = document.getElementById('hudRegionsVisited');
+    this.hudRegionsTotal = document.getElementById('hudRegionsTotal');
+    this.hudRegionEmployees = document.getElementById('hudRegionEmployees');
+
+    if (!this.metadata.totalRegions && this.regionOrder.length > 0) {
+      this.metadata.totalRegions = this.regionOrder.length;
+    }
+
+    if (this.hudRegionsTotal && this.metadata.totalRegions) {
+      this.hudRegionsTotal.textContent = this.metadata.totalRegions;
+    }
 
     // Employee modal elements
     const employeeModalEl = document.getElementById('employeeModal');
@@ -301,6 +332,8 @@ class EmployeeMapApp {
 
     this.updatePanelNavigation();
     this.highlightRegion(regionId);
+    this.markRegionVisited(regionId);
+    this.updateHud(region);
 
     if (focusPanel) {
       requestAnimationFrame(() => {
@@ -356,8 +389,11 @@ class EmployeeMapApp {
     const currentIndex = this.regionOrder.indexOf(this.currentRegionId);
     if (currentIndex === -1) return;
 
-    const nextIndex = currentIndex + direction;
-    if (nextIndex < 0 || nextIndex >= this.regionOrder.length) return;
+    let nextIndex = currentIndex + direction;
+
+    if (this.regionOrder.length > 0) {
+      nextIndex = (nextIndex + this.regionOrder.length) % this.regionOrder.length;
+    }
 
     const nextRegionId = this.regionOrder[nextIndex];
     const nextPath = document.getElementById(nextRegionId);
@@ -376,12 +412,14 @@ class EmployeeMapApp {
     const index = this.regionOrder.indexOf(this.currentRegionId);
     const active = this.isPanelActive();
 
+    const shouldDisable = !active || index === -1 || this.regionOrder.length <= 1;
+
     if (this.regionPanelPrev) {
-      this.regionPanelPrev.disabled = !active || index <= 0;
+      this.regionPanelPrev.disabled = shouldDisable;
     }
 
     if (this.regionPanelNext) {
-      this.regionPanelNext.disabled = !active || index === -1 || index >= this.regionOrder.length - 1;
+      this.regionPanelNext.disabled = shouldDisable;
     }
   }
 
@@ -402,6 +440,22 @@ class EmployeeMapApp {
         path.removeAttribute('aria-current');
       }
     });
+  }
+
+  /**
+   * Track visited regions and update HUD counts
+   */
+  markRegionVisited(regionId) {
+    if (!regionId) return;
+
+    const previousCount = this.visitedRegions.size;
+    this.visitedRegions.add(regionId);
+
+    if (window.AccessibilityManager && this.visitedRegions.size !== previousCount) {
+      window.AccessibilityManager.announce(
+        `تم استكشاف ${this.visitedRegions.size} من ${this.metadata.totalRegions} مناطق`
+      );
+    }
   }
 
   /**

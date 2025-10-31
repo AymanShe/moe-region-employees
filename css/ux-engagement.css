@@ -8,6 +8,91 @@
   --panel-padding: 1.5rem;
   --panel-transition: cubic-bezier(0.22, 1, 0.36, 1);
   --panel-gradient: linear-gradient(145deg, rgba(13, 110, 253, 0.12), rgba(13, 110, 253, 0.03));
+  --atmosphere-gradient: radial-gradient(circle at 20% 20%, rgba(13, 110, 253, 0.15), transparent 55%),
+    radial-gradient(circle at 80% 10%, rgba(111, 66, 193, 0.18), transparent 45%),
+    linear-gradient(180deg, rgba(240, 248, 255, 0.65) 0%, rgba(255, 255, 255, 0.2) 100%);
+  --atmosphere-glow: radial-gradient(circle at 50% 50%, rgba(13, 110, 253, 0.12), transparent 65%);
+  --hud-bg: rgba(13, 110, 253, 0.12);
+  --hud-border: rgba(13, 110, 253, 0.25);
+  --hud-blur: blur(14px);
+}
+
+.ux-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ux-atmosphere__gradient,
+.ux-atmosphere__glow {
+  position: absolute;
+  inset: 0;
+  background: var(--atmosphere-gradient);
+  transform: scale(1.05);
+  filter: saturate(1.05);
+}
+
+.ux-atmosphere__glow {
+  background: var(--atmosphere-glow);
+  opacity: 0.7;
+  mix-blend-mode: screen;
+  animation: glowPulse 12s ease-in-out infinite;
+}
+
+.ux-atmosphere__particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.ux-particle {
+  position: absolute;
+  display: block;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0.3;
+  animation: particleFloat 18s linear infinite;
+}
+
+.ux-particle--1 { top: 10%; left: 12%; animation-delay: -2s; }
+.ux-particle--2 { top: 24%; right: 8%; animation-delay: -6s; }
+.ux-particle--3 { bottom: 18%; left: 22%; animation-delay: -10s; }
+.ux-particle--4 { bottom: 8%; right: 16%; animation-delay: -14s; }
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1.05); }
+  50% { opacity: 0.85; transform: scale(1.1); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+  50% { transform: translate3d(-10px, -26px, 0) scale(1.05); opacity: 0.45; }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+}
+
+@keyframes cardIntro {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-shell,
+.map-column,
+.region-panel {
+  position: relative;
+  z-index: 1;
 }
 
 .app-shell {
@@ -29,6 +114,7 @@
   min-width: 0;
   display: flex;
   justify-content: center;
+  padding-top: 1.5rem;
 }
 
 .map-column .map-container {
@@ -195,6 +281,9 @@
   text-align: right;
   cursor: pointer;
   width: 100%;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: cardIntro 420ms var(--panel-transition) forwards;
 }
 
 .employee-card:hover,
@@ -287,6 +376,7 @@
 
   .map-column {
     flex: 1 1 auto;
+    padding-top: 2.75rem;
   }
 }
 
@@ -299,6 +389,7 @@
 
   .map-column {
     justify-content: stretch;
+    padding-top: 1.5rem;
   }
 
   .region-panel {
@@ -349,6 +440,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ux-atmosphere__glow,
+  .ux-particle,
   .region-panel,
   .region-panel-backdrop,
   .employee-card,
@@ -359,7 +452,19 @@
     animation: none !important;
   }
 
+  .ux-atmosphere__gradient,
+  .ux-atmosphere__glow {
+    transform: none;
+  }
+
   .map-container path.region-active {
     filter: none;
   }
 }
+.region-panel__list .employee-card:nth-child(1) { animation-delay: 40ms; }
+.region-panel__list .employee-card:nth-child(2) { animation-delay: 90ms; }
+.region-panel__list .employee-card:nth-child(3) { animation-delay: 140ms; }
+.region-panel__list .employee-card:nth-child(4) { animation-delay: 190ms; }
+.region-panel__list .employee-card:nth-child(5) { animation-delay: 240ms; }
+.region-panel__list .employee-card:nth-child(6) { animation-delay: 290ms; }
+.region-panel__list .employee-card:nth-child(n+7) { animation-delay: 320ms; }
