@@ -633,8 +633,73 @@ window.addEventListener('offline', () => {
   document.body.appendChild(statusDiv);
 });
 
+const THEME_STORAGE_KEY = 'moe-ui-theme';
+
+function applyTheme(theme) {
+  const resolvedTheme = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', resolvedTheme);
+  document.body.setAttribute('data-theme', resolvedTheme);
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    const icon = themeToggle.querySelector('.cta-toggle__icon');
+    const label = themeToggle.querySelector('.cta-toggle__label');
+    themeToggle.setAttribute('aria-pressed', resolvedTheme === 'dark');
+    if (icon) {
+      icon.textContent = resolvedTheme === 'dark' ? '🌜' : '🌞';
+    }
+    if (label) {
+      label.textContent = resolvedTheme === 'dark' ? 'الوضع الداكن' : 'الوضع الفاتح';
+    }
+  }
+}
+
+function initThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  if (!themeToggle) return;
+
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+  applyTheme(initialTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  });
+
+  const mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  if (mediaQuery) {
+    const listener = (event) => {
+      const storedValue = localStorage.getItem(THEME_STORAGE_KEY);
+      if (storedValue) return;
+      applyTheme(event.matches ? 'dark' : 'light');
+    };
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', listener);
+    } else if (typeof mediaQuery.addListener === 'function') {
+      mediaQuery.addListener(listener);
+    }
+  }
+}
+
+function initLanguageToggle() {
+  const languageToggle = document.getElementById('languageToggle');
+  if (!languageToggle) return;
+
+  languageToggle.addEventListener('click', () => {
+    if (window.ErrorHandler && typeof ErrorHandler.showError === 'function') {
+      ErrorHandler.showError('دعم اللغات الإضافية قريباً', 'warning');
+    }
+  });
+}
+
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const app = new EmployeeMapApp();
   app.init();
+  initThemeToggle();
+  initLanguageToggle();
 });

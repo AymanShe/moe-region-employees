@@ -257,9 +257,9 @@ body {
 
   /* Buttons in modals */
   .modal .btn-primary {
-    color: #ffffff !important;
-    background-color: #0d6efd !important;
-    border-color: #0d6efd !important;
+    color: var(--accent-contrast) !important;
+    background-color: var(--accent-main) !important;
+    border-color: var(--accent-main) !important;
     transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
                 box-shadow 220ms ease,
                 background-color 220ms ease,
@@ -287,6 +287,12 @@ body {
     transform: translateY(-1px);
     box-shadow: 0 10px 20px rgba(13, 110, 253, 0.24);
   }
+}
+
+[data-theme="dark"] .modal .btn-primary {
+  background-color: var(--accent-main) !important;
+  border-color: var(--accent-main) !important;
+  color: var(--accent-contrast) !important;
 }
 
 /* Tablet adjustments */

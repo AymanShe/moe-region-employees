@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="color-scheme" content="light only">
+  <meta name="color-scheme" content="light dark">
   <title>خريطة السعودية التفاعلية</title>
 
   <!-- Bootstrap RTL CSS -->
@@ -27,12 +27,11 @@
   <link rel="stylesheet" href="css/ux-engagement.css">
 
   <style>
-    /* Force light mode */
     :root {
-      color-scheme: light only;
+      color-scheme: light dark;
     }
 
-    body, html { margin:0; padding:0; min-height:100%; background-color: #ffffff; color: #212529; }
+    body, html { margin:0; padding:0; min-height:100%; background-color: var(--bg-body); color: var(--text-base); transition: background-color 200ms ease, color 200ms ease; }
     .map-container { position: relative; width:100%; margin:0; }
     .map-container svg { width:100%; height:auto; display:block; }
     #tooltip {
@@ -77,6 +76,23 @@
       <span class="ux-particle ux-particle--4"></span>
     </div>
   </div>
+
+  <header class="app-header" id="appHeader">
+    <div class="app-header__title-group">
+      <h1 class="app-header__title">خريطة موظفي وزارة التعليم</h1>
+      <p class="app-header__subtitle">استكشف الفرق في مناطق المملكة</p>
+    </div>
+    <div class="app-header__actions" role="group" aria-label="خيارات الواجهة">
+      <button type="button" class="cta-toggle" id="themeToggle" aria-pressed="false">
+        <span class="cta-toggle__icon" aria-hidden="true">🌞</span>
+        <span class="cta-toggle__label">الوضع الفاتح</span>
+      </button>
+      <button type="button" class="cta-toggle" id="languageToggle" aria-label="تغيير اللغة (قريباً)">
+        <span class="cta-toggle__icon" aria-hidden="true">🌐</span>
+        <span class="cta-toggle__label">اللغة: العربية (قريباً)</span>
+      </button>
+    </div>
+  </header>
 
   <div class="app-shell" id="appShell">
     <section class="map-column" id="mapColumn">
