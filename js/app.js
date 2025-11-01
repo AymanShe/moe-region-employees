@@ -685,21 +685,9 @@ function initThemeToggle() {
   }
 }
 
-function initLanguageToggle() {
-  const languageToggle = document.getElementById('languageToggle');
-  if (!languageToggle) return;
-
-  languageToggle.addEventListener('click', () => {
-    if (window.ErrorHandler && typeof ErrorHandler.showError === 'function') {
-      ErrorHandler.showError('دعم اللغات الإضافية قريباً', 'warning');
-    }
-  });
-}
-
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const app = new EmployeeMapApp();
   app.init();
   initThemeToggle();
-  initLanguageToggle();
 });

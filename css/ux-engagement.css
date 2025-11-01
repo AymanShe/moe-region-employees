@@ -528,7 +528,19 @@
 
 @media (max-width: 992px) {
   .ux-atmosphere__particles {
-    display: none;
+    display: block;
+  }
+
+  .ux-atmosphere__glow {
+    animation: none;
+    transform: none;
+    opacity: 0.5;
+  }
+
+  .ux-particle {
+    animation: none;
+    transform: none;
+    opacity: 0.2;
   }
 
   .app-header {
