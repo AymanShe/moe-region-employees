@@ -32,8 +32,8 @@ body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
-    background-color: #ffffff;
-    color: #212529;
+    background-color: var(--bg-body);
+    color: var(--text-base);
   }
 
   /* Ensure all text is readable on mobile */
@@ -42,15 +42,15 @@ body {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #212529;
+    color: var(--text-primary);
   }
 
   p, div, span, td, th {
-    color: #212529;
+    color: var(--text-secondary);
   }
 
   a {
-    color: #0d6efd;
+    color: var(--accent-main);
   }
 }
 
@@ -184,27 +184,27 @@ body {
     height: 100%;
     border: 0;
     border-radius: 0;
-    background-color: #ffffff !important;
-    color: #212529 !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-primary) !important;
   }
 
   .modal-body {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 1rem;
-    background-color: #ffffff !important;
-    color: #212529 !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-primary) !important;
   }
 
   .modal-header {
     padding: 1rem;
     border-bottom: 1px solid #dee2e6;
-    background-color: #ffffff !important;
-    color: #212529 !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-primary) !important;
   }
 
   .modal-title {
-    color: #212529 !important;
+    color: var(--text-primary) !important;
   }
 
   /* Larger close button on mobile */
@@ -218,22 +218,22 @@ body {
 
   /* Ensure text in modals is readable */
   .modal h1, .modal h2, .modal h3, .modal h4, .modal h5, .modal h6 {
-    color: #212529 !important;
+    color: var(--text-primary) !important;
   }
 
   .modal p, .modal div, .modal span {
-    color: #212529 !important;
+    color: var(--text-secondary) !important;
   }
 
   /* Table text in modals */
   .modal .table {
-    color: #212529 !important;
-    background-color: #ffffff !important;
+    color: var(--text-secondary) !important;
+    background-color: var(--panel-bg) !important;
   }
 
   .modal .table th,
   .modal .table td {
-    color: #212529 !important;
+    color: var(--text-secondary) !important;
     background-color: transparent !important;
   }
 
@@ -242,17 +242,17 @@ body {
   }
 
   .modal .table-light {
-    background-color: #f8f9fa !important;
-    color: #212529 !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-secondary) !important;
   }
 
   /* Links in modals */
   .modal a {
-    color: #0d6efd !important;
+    color: var(--accent-main) !important;
   }
 
   .modal a:hover {
-    color: #0a58ca !important;
+    color: var(--accent-main) !important;
   }
 
   /* Buttons in modals */
@@ -274,7 +274,7 @@ body {
 
   /* Fix button text visibility */
   .modal a.btn-primary {
-    color: #ffffff !important;
+    color: var(--accent-contrast) !important;
   }
 
   .modal .btn-primary:hover,
@@ -303,18 +303,18 @@ body {
 
   /* Ensure readability on tablet too */
   .modal-content {
-    background-color: #ffffff !important;
-    color: #212529 !important;
+    background-color: var(--panel-bg) !important;
+    color: var(--text-primary) !important;
   }
 
   .modal-title,
   .modal-body,
   .modal-header {
-    color: #212529 !important;
+    color: var(--text-secondary) !important;
   }
 
   .modal .table {
-    color: #212529 !important;
+    color: var(--text-secondary) !important;
   }
 }
 
