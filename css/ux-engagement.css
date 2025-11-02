@@ -21,6 +21,12 @@
   --atmosphere-glow: radial-gradient(circle at 50% 50%, rgba(13, 110, 253, 0.12), transparent 65%);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
   --bg-body: #061225;
@@ -207,7 +213,8 @@
   margin: 0 auto;
   padding: 2rem;
   box-sizing: border-box;
-  min-height: 100vh;
+  flex: 1 1 auto;
+  min-height: 0;
   transition: padding 240ms ease, gap 200ms ease;
 }
 
