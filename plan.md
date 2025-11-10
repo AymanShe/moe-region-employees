@@ -14,12 +14,12 @@ This document outlines a comprehensive improvement plan for the MOE Region Emplo
 
 ## Progress Overview
 
-### Phase 1: Foundation - [x] 1/5 Complete
+### Phase 1: Foundation - [x] 5/5 Complete
 - [x] Externalize data structure ✅
-- [ ] Add error handling
-- [ ] Improve accessibility
-- [ ] Mobile optimization
-- [ ] Phase 1 testing
+- [x] Add error handling ✅
+- [x] Improve accessibility
+- [x] Mobile optimization
+- [x] Phase 1 testing
 
 ### Phase 2: Enhanced UX - [ ] 0/6 Complete
 - [ ] Search & filter functionality
@@ -43,9 +43,10 @@ This document outlines a comprehensive improvement plan for the MOE Region Emplo
 1. [Phase 1: High Priority Improvements](#phase-1-high-priority-improvements)
 2. [Phase 2: Medium Priority Improvements](#phase-2-medium-priority-improvements)
 3. [Phase 3: Low Priority Improvements](#phase-3-low-priority-improvements)
-4. [Testing & Quality Assurance](#testing--quality-assurance)
-5. [Deployment](#deployment)
-6. [Code Examples & References](#code-examples--references)
+4. [Phase 2.5: UX Engagement Enhancements](#phase-25-ux-engagement-enhancements)
+5. [Testing & Quality Assurance](#testing--quality-assurance)
+6. [Deployment](#deployment)
+7. [Code Examples & References](#code-examples--references)
 
 ---
 
@@ -123,23 +124,23 @@ This document outlines a comprehensive improvement plan for the MOE Region Emplo
 **Solution:** Implement error boundaries and graceful degradation.
 
 #### Todo Items:
-- [ ] Create `js/error-handler.js` module
-- [ ] Implement ImageHandler class
-  - [ ] Add handleImageError method
-  - [ ] Add preloadImage method
-  - [ ] Add loadEmployeeImages method
-- [ ] Implement DataValidator class
-  - [ ] Add validateRegion method
-  - [ ] Add validateEmployee method
-- [ ] Implement ErrorHandler class
-  - [ ] Add showError method with Bootstrap toast
-  - [ ] Add createToastContainer method
-- [ ] Create `images/placeholder-avatar.svg`
-- [ ] Add error handling to data loading
-- [ ] Add error handling to image loading
-- [ ] Add try-catch blocks to all async operations
-- [ ] Test error scenarios (network offline, missing images, corrupt data)
-- [ ] Add error logging for debugging
+- [x] Create `js/error-handler.js` module ✅
+- [x] Implement ImageHandler class ✅
+  - [x] Add handleImageError method ✅
+  - [x] Add preloadImage method ✅
+  - [x] Add loadEmployeeImages method ✅
+- [x] Implement DataValidator class ✅
+  - [x] Add validateRegion method ✅
+  - [x] Add validateEmployee method ✅
+- [x] Implement ErrorHandler class ✅
+  - [x] Add showError method with Bootstrap toast ✅
+  - [x] Add createToastContainer method ✅
+- [x] Create `images/placeholder-avatar.svg` ✅
+- [x] Add error handling to data loading ✅
+- [x] Add error handling to image loading ✅
+- [x] Add try-catch blocks to all async operations ✅
+- [x] Test error scenarios (network offline, missing images, corrupt data) ✅
+- [x] Add error logging for debugging ✅
 
 **Benefits:**
 - ✅ Better user experience
@@ -315,15 +316,15 @@ class ErrorHandler {
 ### 5. Phase 1 Testing & Bug Fixes (2-3 hours)
 
 #### Todo Items:
-- [ ] Run full regression test suite
-- [ ] Test data loading edge cases
-- [ ] Test error handling scenarios
-- [ ] Test accessibility with screen readers
-- [ ] Test mobile responsiveness
-- [ ] Fix any identified bugs
-- [ ] Code review and refactoring
-- [ ] Update documentation
-- [ ] Commit Phase 1 changes to git
+- [x] Run full regression test suite
+- [x] Test data loading edge cases
+- [x] Test error handling scenarios
+- [x] Test accessibility with screen readers
+- [x] Test mobile responsiveness
+- [x] Fix any identified bugs
+- [x] Code review and refactoring
+- [x] Update documentation
+- [x] Commit Phase 1 changes to git
 
 ---
 
@@ -674,6 +675,43 @@ class DataExporter {
 
 ---
 
+## Phase 2.5: UX Engagement Enhancements
+
+> Elevate the UI with game-inspired transitions, atmospheric motion, and exploratory feedback—without introducing sound effects.
+
+### Milestone 1 – Interaction Flow (1–2 sprints)
+**Status:** Completed
+- [x] Replace full-screen region modal with persistent detail panel or card stack while keeping the map visible
+- [x] Add region-to-region navigation controls (arrow buttons, keyboard arrows, swipe gestures) inside the panel
+- [x] Animate focused region paths (scale/opacity pulse, glow) and dim inactive regions
+- [x] Validate accessibility for the new flow (`aria-live`, focus management, `prefers-reduced-motion` support)
+
+### Milestone 2 – UX Atmosphere & Motion (1 sprint)
+**Status:** Completed
+- [x] Layer animated backgrounds or particle effects behind the active region using performant CSS transforms
+- [x] Stagger employee card entry with easing curves and subtle parallax
+- [x] Enhance CTAs (e.g., CV download) with hover/active transitions that respect RTL and contrast requirements
+- [x] Introduce persistent HUD elements (compass, employee counters) that complement map exploration
+
+### Milestone 3 – Future Enhancements (TBD)
+- [ ] Define next UX priorities with stakeholders before implementation
+- [ ] Capture any remaining ideas (reset flow, additional ambience) for future scoping
+
+### Milestone 4 – Polish & Performance (ongoing)
+- [ ] Audit animation performance (GPU-friendly transforms, `will-change`, requestAnimationFrame loops)
+- [ ] Provide reduced-motion toggle and honor system preferences, disabling advanced effects as needed
+- [ ] Add regression tests for the new navigation layer (keyboard, screen reader, interaction flow)
+- [ ] Review color/motion direction with stakeholders and iterate on timing, density, and visual assets
+
+**Dependencies:**
+- Phase 2 search/filter foundation to power richer panel interactions and quick region switching.
+- Additional region metadata (lore/facts) in `data/regions.json`.
+- Design assets such as glow layers, particle sprites, and gradient palettes.
+
+**Reference:** See `UX-ENGAGEMENT-ROADMAP.md` for full rationale, visual inspiration, and implementation notes.
+
+---
+
 ## Testing & Quality Assurance
 
 ### Accessibility Testing
@@ -895,9 +933,9 @@ class DataExporter {
 
 **Last Updated:** 2025-10-29
 **Current Phase:** Phase 1 - In Progress
-**Completion:** ~7%
+**Completion:** ~14%
 
-### Completed Items: 10 / ~150+
+### Completed Items: 20 / ~150+
 
 ---
 
