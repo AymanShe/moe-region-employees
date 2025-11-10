@@ -1002,46 +1002,57 @@ class MobileOptimizer {
   forceModalLightColors(modal) {
     if (!this.isMobile) return;
 
+    // Check current theme
+    const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    // If dark theme is active, use dark colors; otherwise use light colors
+    const bgColor = isDarkTheme ? '#1a1a1a' : '#ffffff';
+    const textColor = isDarkTheme ? '#f0f0f0' : '#212529';
+    const secondaryTextColor = isDarkTheme ? '#b0b0b0' : '#666666';
+
     const modalContent = modal.querySelector('.modal-content');
     const modalHeader = modal.querySelector('.modal-header');
     const modalBody = modal.querySelector('.modal-body');
     const modalTitle = modal.querySelector('.modal-title');
 
     if (modalContent) {
-      modalContent.style.backgroundColor = '#ffffff';
-      modalContent.style.color = '#212529';
+      modalContent.style.backgroundColor = bgColor;
+      modalContent.style.color = textColor;
+      modalContent.style.borderColor = isDarkTheme ? '#333333' : '#dee2e6';
     }
     if (modalHeader) {
-      modalHeader.style.backgroundColor = '#ffffff';
-      modalHeader.style.color = '#212529';
+      modalHeader.style.backgroundColor = bgColor;
+      modalHeader.style.color = textColor;
+      modalHeader.style.borderColor = isDarkTheme ? '#333333' : '#dee2e6';
     }
     if (modalBody) {
-      modalBody.style.backgroundColor = '#ffffff';
-      modalBody.style.color = '#212529';
+      modalBody.style.backgroundColor = bgColor;
+      modalBody.style.color = textColor;
     }
-    if (modalTitle) modalTitle.style.color = '#212529';
+    if (modalTitle) modalTitle.style.color = textColor;
 
     const tables = modal.querySelectorAll('.table');
     tables.forEach(table => {
-      table.style.backgroundColor = '#ffffff';
-      table.style.color = '#212529';
+      table.style.backgroundColor = bgColor;
+      table.style.color = textColor;
 
       const cells = table.querySelectorAll('th, td');
       cells.forEach(cell => {
-        cell.style.color = '#212529';
+        cell.style.color = textColor;
         cell.style.backgroundColor = 'transparent';
+        cell.style.borderColor = isDarkTheme ? '#333333' : '#dee2e6';
       });
 
       const stripeRows = table.querySelectorAll('tbody tr:nth-of-type(odd)');
       stripeRows.forEach(row => {
-        row.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+        row.style.backgroundColor = isDarkTheme ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
       });
     });
 
     const textElements = modal.querySelectorAll('h1, h2, h3, h4, h5, h6, p, div, span');
     textElements.forEach(el => {
       if (!el.classList.contains('btn-close')) {
-        el.style.color = '#212529';
+        el.style.color = textColor;
       }
     });
 
@@ -1052,7 +1063,7 @@ class MobileOptimizer {
           link.style.color = '#ffffff';
           link.style.backgroundColor = '#0d6efd';
         } else {
-          link.style.color = '#0d6efd';
+          link.style.color = isDarkTheme ? '#64b5f6' : '#0d6efd';
         }
       }
     });
@@ -1063,11 +1074,17 @@ class MobileOptimizer {
         btn.style.color = '#ffffff';
         btn.style.backgroundColor = '#0d6efd';
       } else if (!btn.classList.contains('btn-close') && btn.classList.contains('btn')) {
-        btn.style.color = '#212529';
+        btn.style.color = textColor;
       }
     });
 
-    console.log('Forced light colors on modal for mobile');
+    // Style close button for dark mode
+    const closeBtn = modal.querySelector('.btn-close');
+    if (closeBtn && isDarkTheme) {
+      closeBtn.style.filter = 'invert(1)';
+    }
+
+    console.log(`Applied ${isDarkTheme ? 'dark' : 'light'} modal theme for mobile`);
   }
 
   setupSwipeGestures() {
