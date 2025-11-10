@@ -1,0 +1,126 @@
+/**
+ * Modal and Employee Profile Styling
+ * Displays single profile image with constrained size
+ */
+
+/* Employee Modal */
+.modal-body {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+/* Employee Profile Container */
+.employee-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Profile Image */
+.employee-profile__image {
+  max-width: 100%;
+  max-height: 450px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 200ms ease;
+}
+
+/* Hover effect for profile image */
+.employee-profile__image:hover {
+  transform: scale(1.02);
+}
+
+/* Employee Details */
+.employee-profile__details {
+  width: 100%;
+}
+
+/* Position/Title */
+.employee-profile__position {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary, #333);
+  margin: 0.5rem 0;
+}
+
+/* English Position */
+.employee-profile__position-en {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #666);
+  margin: 0.25rem 0;
+  font-weight: 500;
+}
+
+/* Start Date */
+.employee-profile__start-date {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  margin: 0.5rem 0 0 0;
+}
+
+/* Modal Action Buttons */
+.modal-body .btn {
+  margin-top: 1rem;
+  min-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 1.5rem 1rem;
+  }
+
+  .employee-profile__image {
+    max-height: 400px;
+  }
+
+  .employee-profile__position {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-body {
+    padding: 1rem 0.75rem;
+  }
+
+  .employee-profile {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .employee-profile__image {
+    max-height: 350px;
+  }
+
+  .employee-profile__position {
+    font-size: 0.95rem;
+  }
+
+  .employee-profile__position-en {
+    font-size: 0.85rem;
+  }
+
+  .modal-body .btn {
+    min-width: 100%;
+  }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .employee-profile__position {
+  color: var(--text-primary, #f0f0f0);
+}
+
+[data-theme="dark"] .employee-profile__position-en,
+[data-theme="dark"] .employee-profile__start-date {
+  color: var(--text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .employee-profile__image {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}

@@ -561,46 +561,34 @@ class EmployeeMapApp {
    * Open modal showing employee details
    */
   openEmployeeModal(employee) {
-    // Generate carousel items with error handling
-    const carouselItems = employee.images.map((src, i) => `
-      <div class="carousel-item ${i === 0 ? 'active' : ''}">
-        <img src="${src}"
-             class="d-block w-100"
-             alt="${employee.name}"
-             onerror="ImageHandler.handleImageError(this, '${employee.name}')">
-      </div>
-    `).join('');
+    // Get the first (and only) image
+    const profileImage = employee.images && employee.images.length > 0
+      ? employee.images[0]
+      : 'images/placeholder-avatar.svg';
 
-    // Set modal content
+    // Set modal content with single image (no carousel needed)
     this.employeeModalTitle.textContent = employee.name;
     this.employeeModalBody.innerHTML = `
-      <div id="employeeCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          ${carouselItems}
+      <div class="employee-profile">
+        <img src="${profileImage}"
+             class="employee-profile__image"
+             alt="${employee.name}"
+             onerror="ImageHandler.handleImageError(this, '${employee.name}')">
+        <div class="employee-profile__details">
+          <p class="employee-profile__position">${employee.position}</p>
+          ${employee.positionEn ? `<p class="employee-profile__position-en">${employee.positionEn}</p>` : ''}
+          ${employee.startDate ? `<p class="employee-profile__start-date">تاريخ البدء: ${employee.startDate}</p>` : ''}
         </div>
-        <button class="carousel-control-prev" type="button"
-                data-bs-target="#employeeCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-          <span class="visually-hidden">السابق</span>
-        </button>
-        <button class="carousel-control-next" type="button"
-                data-bs-target="#employeeCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-          <span class="visually-hidden">التالي</span>
-        </button>
       </div>
-      <a href="${employee.cv}" class="btn btn-primary mt-3" target="_blank">تحميل السيرة الذاتية</a>
+      ${employee.cv ? `<a href="${employee.cv}" class="btn btn-primary mt-3" target="_blank">تحميل السيرة الذاتية</a>` : ''}
     `;
 
     // Show modal
     this.employeeModal.show();
 
-    // Enhance carousel accessibility
+    // Announce to accessibility manager
     if (window.AccessibilityManager) {
-      const carousel = this.employeeModalBody.querySelector('.carousel');
-      if (carousel) {
-        window.AccessibilityManager.enhanceCarouselAccessibility(carousel);
-      }
+      window.AccessibilityManager.announce(`${employee.name} - ${employee.position}`);
     }
   }
 
