@@ -77,18 +77,19 @@ class EmployeeMapApp {
   }
 
   /**
-   * Load employee data from JSON file
+   * Load employee data from inline JavaScript variable
+   * Data is embedded directly in js/regions-data.js (no network request needed)
    */
   async loadData() {
     try {
       console.log('Loading employee data...');
-      const response = await fetch('data/regions.json');
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Check if regionsData is available (defined in js/regions-data.js)
+      if (typeof regionsData === 'undefined') {
+        throw new Error('Employee data not loaded. Make sure js/regions-data.js is included.');
       }
 
-      const data = await response.json();
+      const data = regionsData;
 
       // Validate data structure
       try {
@@ -119,12 +120,8 @@ class EmployeeMapApp {
       console.log(`Loaded ${totalEmployees} employees across ${totalRegions} regions`);
     } catch (error) {
       ErrorHandler.logError('loadData', error, {
-        url: 'data/regions.json'
+        source: 'js/regions-data.js'
       });
-
-      if (error.message.includes('HTTP')) {
-        ErrorHandler.handleNetworkError(error);
-      }
 
       throw new Error('Failed to load employee data: ' + error.message);
     }

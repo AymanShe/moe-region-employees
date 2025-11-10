@@ -1,0 +1,334 @@
+/**
+ * Employee Regions Data
+ * This file contains all the employee and region data for the application
+ * No server needed - data is embedded directly in JavaScript
+ */
+
+const regionsData = {
+  "regions": {
+    "SA-01": {
+      "id": "SA-01",
+      "name": "منطقة الرياض",
+      "nameEn": "Riyadh Region",
+      "employees": []
+    },
+    "SA-02": {
+      "id": "SA-02",
+      "name": "منطقة مكة المكرمة",
+      "nameEn": "Makkah Region",
+      "employees": [
+        {
+          "id": "emp001",
+          "name": "خالد الزهراني",
+          "nameEn": "Khalid Al Zahrani",
+          "position": "مستشار",
+          "positionEn": "Consultant",
+          "startDate": "2025-04-06",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp002",
+          "name": "أحمد الحربي",
+          "nameEn": "Ahmad Al Harbi",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-01-05",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-03": {
+      "id": "SA-03",
+      "name": "المدينة المنورة",
+      "nameEn": "Al Madinah",
+      "employees": [
+        {
+          "id": "emp011",
+          "name": "عبدالله السحيمي",
+          "nameEn": "Abdullah Al Saihmi",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-06-29",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp012",
+          "name": "عبدالرحمن الحيدري",
+          "nameEn": "Abdulrahman Al Haidari",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-06-29",
+          "images": [
+            "images/abdulrahman_alhaidari.png"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-04": {
+      "id": "SA-04",
+      "name": "المنطقة الشرقية",
+      "nameEn": "Eastern Province",
+      "employees": [
+        {
+          "id": "emp003",
+          "name": "فهد السحيباني",
+          "nameEn": "Fahad Al Suhibani",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-06-22",
+          "images": [
+            "images/fahad_alsuhibani.jpeg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp004",
+          "name": "محمد الغامدي",
+          "nameEn": "Muhammad Al Ghamdi",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-01-01",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-05": {
+      "id": "SA-05",
+      "name": "منطقة القصيم",
+      "nameEn": "Al Qassim Region",
+      "employees": [
+        {
+          "id": "emp007",
+          "name": "عدنان المطوع",
+          "nameEn": "Adnan Al Mutawa",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2024-10-20",
+          "images": [
+            "images/adnan_almutawa.jpg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp008",
+          "name": "عبدالله السبيعي",
+          "nameEn": "Abdullah Al Subai",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-03-02",
+          "images": [
+            "images/abdullah_alsubaie.jpg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-06": {
+      "id": "SA-06",
+      "name": "منطقة حائل",
+      "nameEn": "Hail Region",
+      "employees": [
+        {
+          "id": "emp018",
+          "name": "سلطان الشمري",
+          "nameEn": "Sultan Al Shammari",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-05-04",
+          "images": [
+            "images/sultan_alsahmmari.jpg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-07": {
+      "id": "SA-07",
+      "name": "منطقة تبوك",
+      "nameEn": "Tabuk Region",
+      "employees": [
+        {
+          "id": "emp005",
+          "name": "ضيف الله العمراني",
+          "nameEn": "Dhaifallah Al Omrani",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-06-22",
+          "images": [
+            "images/daifallah_alomrani.jpg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp006",
+          "name": "سلمان البلوي",
+          "nameEn": "Salman Al Balawi",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-05-12",
+          "images": [
+            "images/salman_albalawi.jpg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-08": {
+      "id": "SA-08",
+      "name": "منطقة الحدود الشمالية",
+      "nameEn": "Northern Borders Region",
+      "employees": [
+        {
+          "id": "emp016",
+          "name": "عبدالرحمن الرباعي",
+          "nameEn": "Abdulrahman Al Rubai",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-05-04",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-09": {
+      "id": "SA-09",
+      "name": "منطقة جازان",
+      "nameEn": "Jazan Region",
+      "employees": [
+        {
+          "id": "emp013",
+          "name": "حسين عتودي",
+          "nameEn": "Hussein Atoudi",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-04-20",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp014",
+          "name": "محمد نجمي",
+          "nameEn": "Muhammad Najmi",
+          "position": "مهندس محترف",
+          "positionEn": "Professional Engineer",
+          "startDate": "2025-03-02",
+          "images": [
+            "images/mohammed_najmi.jpeg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-10": {
+      "id": "SA-10",
+      "name": "منطقة نجران",
+      "nameEn": "Najran Region",
+      "employees": [
+        {
+          "id": "emp019",
+          "name": "سلطان القحطاني",
+          "nameEn": "Sultan Al Qahtani",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-05-18",
+          "images": [
+            "images/sultan_alqahtani.jpg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-11": {
+      "id": "SA-11",
+      "name": "منطقة الباحة",
+      "nameEn": "Al Bahah Region",
+      "employees": [
+        {
+          "id": "emp017",
+          "name": "فيصل الغامدي",
+          "nameEn": "Faisal Al Ghamdi",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-06-22",
+          "images": [
+            "images/placeholder-avatar.svg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-12": {
+      "id": "SA-12",
+      "name": "منطقة الجوف",
+      "nameEn": "Al Jouf Region",
+      "employees": [
+        {
+          "id": "emp015",
+          "name": "عبدالله النصر",
+          "nameEn": "Abdullah Al Nasser",
+          "position": "كبير مهندسين",
+          "positionEn": "Chief Engineer",
+          "startDate": "2025-06-22",
+          "images": [
+            "images/abdullah_alnaser.jpeg"
+          ],
+          "cv": ""
+        }
+      ]
+    },
+    "SA-14": {
+      "id": "SA-14",
+      "name": "منطقة عسير",
+      "nameEn": "Asir Region",
+      "employees": [
+        {
+          "id": "emp009",
+          "name": "سعيد القاضي",
+          "nameEn": "Saeed Al Qadi",
+          "position": "مهندس خبير",
+          "positionEn": "Senior Engineer",
+          "startDate": "2025-06-29",
+          "images": [
+            "images/saeed_alqadi.jpg"
+          ],
+          "cv": ""
+        },
+        {
+          "id": "emp010",
+          "name": "خالد القحطاني",
+          "nameEn": "Khalid Al Qahtani",
+          "position": "مهندس محترف",
+          "positionEn": "Professional Engineer",
+          "startDate": "2025-05-18",
+          "images": [
+            "images/khalid_alqahtani.jpg"
+          ],
+          "cv": ""
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-10-29",
+    "version": "1.0.0",
+    "totalEmployees": 19,
+    "totalRegions": 12
+  }
+};
