@@ -750,12 +750,6 @@
       line-height: 1.4;
     }
 
-    .region-panel__meta {
-      margin: 0.25rem 0 0;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
     .region-panel__nav,
     .region-panel__close {
       display: inline-flex;
@@ -879,25 +873,11 @@
       font-size: 1.1rem;
     }
 
-    .employee-card__name-en {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-base);
-      margin-top: 0.1rem;
-    }
-
     .employee-card__position {
       display: block;
       margin-top: 0.5rem;
       font-size: 0.95rem;
       color: var(--text-base);
-    }
-
-    .employee-card__position-en {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-base);
-      margin-top: 0.1rem;
     }
 
     .employee-card__badge {
@@ -1844,7 +1824,6 @@
           </button>
           <div class="region-panel__title-group">
             <h2 class="region-panel__title" id="regionPanelTitle"></h2>
-            <p class="region-panel__meta" id="regionPanelMeta"></p>
           </div>
           <button type="button" class="region-panel__nav region-panel__nav--next" id="regionPanelNext" aria-label="المنطقة التالية">
             <span aria-hidden="true">›</span>
@@ -3058,7 +3037,6 @@ class EmployeeMapApp {
     this.regionPanel = null;
     this.regionPanelBody = null;
     this.regionPanelTitle = null;
-    this.regionPanelMeta = null;
     this.regionPanelPrev = null;
     this.regionPanelNext = null;
     this.regionPanelClose = null;
@@ -3162,7 +3140,6 @@ class EmployeeMapApp {
     this.regionPanel = document.getElementById('regionPanel');
     this.regionPanelBody = document.getElementById('regionPanelBody');
     this.regionPanelTitle = document.getElementById('regionPanelTitle');
-    this.regionPanelMeta = document.getElementById('regionPanelMeta');
     this.regionPanelPrev = document.getElementById('regionPanelPrev');
     this.regionPanelNext = document.getElementById('regionPanelNext');
     this.regionPanelClose = document.getElementById('regionPanelClose');
@@ -3265,11 +3242,6 @@ class EmployeeMapApp {
       this.regionPanelTitle.textContent = region.name;
     }
 
-    if (this.regionPanelMeta) {
-      const englishName = region.nameEn ? ` / ${region.nameEn}` : '';
-      this.regionPanelMeta.textContent = `${region.employees.length} موظف${englishName}`;
-    }
-
     const hasEmployees = Array.isArray(region.employees) && region.employees.length > 0;
 
     let bodyContent = ``;
@@ -3279,9 +3251,7 @@ class EmployeeMapApp {
         <div class="employee-card">
           <div class="employee-card__content">
             <span class="employee-card__name">${emp.name}</span>
-            ${emp.nameEn ? `<span class="employee-card__name-en">${emp.nameEn}</span>` : ''}
             <span class="employee-card__position">${emp.position}</span>
-            ${emp.positionEn ? `<span class="employee-card__position-en">${emp.positionEn}</span>` : ''}
           </div>
           <img src="${emp.images && emp.images[0] ? emp.images[0] : 'images/placeholder-avatar.svg'}"
                class="employee-card__image"
